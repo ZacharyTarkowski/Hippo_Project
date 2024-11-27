@@ -1,0 +1,27 @@
+{
+    "files.associations": {
+        "stm32f4xx.h": "c",
+        "main.h": "c",
+        "ring_buffer.h": "c",
+        "general_utils.h": "c",
+        "mpu_6050_utils.h": "c",
+        "dynamic_time_warping.h": "c",
+        "stm32f4xx_hal.h": "c",
+        "stdlib.h": "c",
+        "dd_dtw.h": "c",
+        "dd_globals.h": "c",
+        "dd_ed.h": "c",
+        "time.h": "c",
+        "stdint.h": "c",
+        "orientation_utils.h": "c",
+        "gpio.h": "c",
+        "ili9341_gfx.h": "c",
+        "ili9341_stm32_driver.h": "c",
+        "5x5_font.h": "c",
+        "spi.h": "c",
+        "snow_tiger.h": "c",
+        "ili9341.h": "c",
+        "testimg.h": "c"
+    },
+    "cortex-debug.variableUseNaturalFormat": false
+}

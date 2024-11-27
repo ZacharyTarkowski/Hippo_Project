@@ -1,0 +1,2096 @@
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"ILI9341_STM32_Driver.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.ILI9341_SPI_Init,"ax",%progbits
+  20              		.align	1
+  21              		.global	ILI9341_SPI_Init
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	ILI9341_SPI_Init:
+  27              	.LFB134:
+  28              		.file 1 "Core/Src/ILI9341_STM32_Driver.c"
+   1:Core/Src/ILI9341_STM32_Driver.c **** 
+   2:Core/Src/ILI9341_STM32_Driver.c **** //	MIT License
+   3:Core/Src/ILI9341_STM32_Driver.c **** //
+   4:Core/Src/ILI9341_STM32_Driver.c **** //	Copyright (c) 2017 Matej Artnak
+   5:Core/Src/ILI9341_STM32_Driver.c **** //
+   6:Core/Src/ILI9341_STM32_Driver.c **** //	Permission is hereby granted, free of charge, to any person obtaining a copy
+   7:Core/Src/ILI9341_STM32_Driver.c **** //	of this software and associated documentation files (the "Software"), to deal
+   8:Core/Src/ILI9341_STM32_Driver.c **** //	in the Software without restriction, including without limitation the rights
+   9:Core/Src/ILI9341_STM32_Driver.c **** //	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  10:Core/Src/ILI9341_STM32_Driver.c **** //	copies of the Software, and to permit persons to whom the Software is
+  11:Core/Src/ILI9341_STM32_Driver.c **** //	furnished to do so, subject to the following conditions:
+  12:Core/Src/ILI9341_STM32_Driver.c **** //
+  13:Core/Src/ILI9341_STM32_Driver.c **** //	The above copyright notice and this permission notice shall be included in all
+  14:Core/Src/ILI9341_STM32_Driver.c **** //	copies or substantial portions of the Software.
+  15:Core/Src/ILI9341_STM32_Driver.c **** //
+  16:Core/Src/ILI9341_STM32_Driver.c **** //	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  17:Core/Src/ILI9341_STM32_Driver.c **** //	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  18:Core/Src/ILI9341_STM32_Driver.c **** //	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  19:Core/Src/ILI9341_STM32_Driver.c **** //	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  20:Core/Src/ILI9341_STM32_Driver.c **** //	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  21:Core/Src/ILI9341_STM32_Driver.c **** //	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  22:Core/Src/ILI9341_STM32_Driver.c **** //	SOFTWARE.
+  23:Core/Src/ILI9341_STM32_Driver.c **** //
+  24:Core/Src/ILI9341_STM32_Driver.c **** //
+  25:Core/Src/ILI9341_STM32_Driver.c **** //
+  26:Core/Src/ILI9341_STM32_Driver.c **** //-----------------------------------
+  27:Core/Src/ILI9341_STM32_Driver.c **** //	ILI9341 Driver library for STM32
+  28:Core/Src/ILI9341_STM32_Driver.c **** //-----------------------------------
+  29:Core/Src/ILI9341_STM32_Driver.c **** //
+  30:Core/Src/ILI9341_STM32_Driver.c **** //	While there are other libraries for ILI9341 they mostly require either interrupts, DMA or both f
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 2
+
+
+  31:Core/Src/ILI9341_STM32_Driver.c **** //	The intent of this library is to offer a simple yet still reasonably fast alternatives for those
+  32:Core/Src/ILI9341_STM32_Driver.c **** //	do not wish to use interrupts or DMA in their projects.
+  33:Core/Src/ILI9341_STM32_Driver.c **** //
+  34:Core/Src/ILI9341_STM32_Driver.c **** //	Library is written for STM32 HAL library and supports STM32CUBEMX. To use the library with Cube 
+  35:Core/Src/ILI9341_STM32_Driver.c **** //	you need to tick the box that generates peripheral initialization code in their own respective .
+  36:Core/Src/ILI9341_STM32_Driver.c **** //
+  37:Core/Src/ILI9341_STM32_Driver.c **** //
+  38:Core/Src/ILI9341_STM32_Driver.c **** //-----------------------------------
+  39:Core/Src/ILI9341_STM32_Driver.c **** //	Performance
+  40:Core/Src/ILI9341_STM32_Driver.c **** //-----------------------------------
+  41:Core/Src/ILI9341_STM32_Driver.c **** //	Settings:	
+  42:Core/Src/ILI9341_STM32_Driver.c **** //	--SPI @ 50MHz 
+  43:Core/Src/ILI9341_STM32_Driver.c **** //	--STM32F746ZG Nucleo board
+  44:Core/Src/ILI9341_STM32_Driver.c **** //	--Redraw entire screen
+  45:Core/Src/ILI9341_STM32_Driver.c **** //
+  46:Core/Src/ILI9341_STM32_Driver.c **** //	++		Theoretical maximum FPS with 50Mhz SPI calculated to be 40.69 FPS
+  47:Core/Src/ILI9341_STM32_Driver.c **** //	++		320*240 = 76800 pixels, each pixel contains 16bit colour information (2x8)
+  48:Core/Src/ILI9341_STM32_Driver.c **** //	++		Theoretical Max FPS: 1/((320*240*16)/50000000)
+  49:Core/Src/ILI9341_STM32_Driver.c **** //
+  50:Core/Src/ILI9341_STM32_Driver.c **** //	With ART Accelerator, instruction prefetch, CPI ICACHE and CPU DCACHE enabled:
+  51:Core/Src/ILI9341_STM32_Driver.c **** //
+  52:Core/Src/ILI9341_STM32_Driver.c **** //	-FPS:									39.62
+  53:Core/Src/ILI9341_STM32_Driver.c **** //	-SPI utilization:			97.37%
+  54:Core/Src/ILI9341_STM32_Driver.c **** //	-MB/Second:						6.09
+  55:Core/Src/ILI9341_STM32_Driver.c **** //
+  56:Core/Src/ILI9341_STM32_Driver.c **** //	With ART Accelerator, instruction prefetch, CPI ICACHE and CPU DCACHE disabled:
+  57:Core/Src/ILI9341_STM32_Driver.c **** //
+  58:Core/Src/ILI9341_STM32_Driver.c **** //	-FPS:									35.45
+  59:Core/Src/ILI9341_STM32_Driver.c **** //	-SPI utilization:			87.12%
+  60:Core/Src/ILI9341_STM32_Driver.c **** //	-MB/Second:						5.44
+  61:Core/Src/ILI9341_STM32_Driver.c **** //	
+  62:Core/Src/ILI9341_STM32_Driver.c **** //	ART Accelerator, instruction prefetch, CPI ICACHE and CPU DCACHE settings found in MXCUBE under 
+  63:Core/Src/ILI9341_STM32_Driver.c **** //
+  64:Core/Src/ILI9341_STM32_Driver.c **** //
+  65:Core/Src/ILI9341_STM32_Driver.c **** //
+  66:Core/Src/ILI9341_STM32_Driver.c **** //-----------------------------------
+  67:Core/Src/ILI9341_STM32_Driver.c **** //	How to use this library
+  68:Core/Src/ILI9341_STM32_Driver.c **** //-----------------------------------
+  69:Core/Src/ILI9341_STM32_Driver.c **** //
+  70:Core/Src/ILI9341_STM32_Driver.c **** //	-generate SPI peripheral and 3 GPIO_SPEED_FREQ_VERY_HIGH GPIO outputs
+  71:Core/Src/ILI9341_STM32_Driver.c **** //	 		++Library reinitializes GPIOs and SPIs generated by gpio.c/.h and spi.c/.h using MX_X_Init();
+  72:Core/Src/ILI9341_STM32_Driver.c **** //			++reinitialization will not clash with previous initialization so generated initializations ca
+  73:Core/Src/ILI9341_STM32_Driver.c **** //	-If using MCUs other than STM32F7 you will have to change the #include "stm32f7xx_hal.h" in the 
+  74:Core/Src/ILI9341_STM32_Driver.c **** //	-define your HSPI_INSTANCE in ILI9341_STM32_Driver.h
+  75:Core/Src/ILI9341_STM32_Driver.c **** //	-define your CS, DC and RST outputs in ILI9341_STM32_Driver.h
+  76:Core/Src/ILI9341_STM32_Driver.c **** //	-check if ILI9341_SCREEN_HEIGHT and ILI9341_SCREEN_WIDTH match your LCD size
+  77:Core/Src/ILI9341_STM32_Driver.c **** //			++Library was written and tested for 320x240 screen size. Other sizes might have issues**
+  78:Core/Src/ILI9341_STM32_Driver.c **** //	-in your main program initialize LCD with ILI9341_Init();
+  79:Core/Src/ILI9341_STM32_Driver.c **** //	-library is now ready to be used. Driver library has only basic functions, for more advanced fun
+  80:Core/Src/ILI9341_STM32_Driver.c **** //
+  81:Core/Src/ILI9341_STM32_Driver.c **** //-----------------------------------
+  82:Core/Src/ILI9341_STM32_Driver.c **** 
+  83:Core/Src/ILI9341_STM32_Driver.c **** /* Includes ------------------------------------------------------------------*/
+  84:Core/Src/ILI9341_STM32_Driver.c **** #include "ILI9341_STM32_Driver.h"
+  85:Core/Src/ILI9341_STM32_Driver.c **** #include "spi.h"
+  86:Core/Src/ILI9341_STM32_Driver.c **** #include "gpio.h"
+  87:Core/Src/ILI9341_STM32_Driver.c **** 
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 3
+
+
+  88:Core/Src/ILI9341_STM32_Driver.c **** /* Global Variables ------------------------------------------------------------------*/
+  89:Core/Src/ILI9341_STM32_Driver.c **** volatile uint16_t LCD_HEIGHT = ILI9341_SCREEN_HEIGHT;
+  90:Core/Src/ILI9341_STM32_Driver.c **** volatile uint16_t LCD_WIDTH	 = ILI9341_SCREEN_WIDTH;
+  91:Core/Src/ILI9341_STM32_Driver.c **** 
+  92:Core/Src/ILI9341_STM32_Driver.c **** /* Initialize SPI */
+  93:Core/Src/ILI9341_STM32_Driver.c **** void ILI9341_SPI_Init(void)
+  94:Core/Src/ILI9341_STM32_Driver.c **** {
+  29              		.loc 1 94 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 08B5     		push	{r3, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 8
+  36              		.cfi_offset 3, -8
+  37              		.cfi_offset 14, -4
+  95:Core/Src/ILI9341_STM32_Driver.c **** MX_SPI1_Init();																							//SPI INIT
+  38              		.loc 1 95 1 view .LVU1
+  39 0002 FFF7FEFF 		bl	MX_SPI1_Init
+  40              	.LVL0:
+  96:Core/Src/ILI9341_STM32_Driver.c **** MX_GPIO_Init();																							//GPIO INIT
+  41              		.loc 1 96 1 view .LVU2
+  42 0006 FFF7FEFF 		bl	MX_GPIO_Init
+  43              	.LVL1:
+  97:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);	//CS OFF
+  44              		.loc 1 97 1 view .LVU3
+  45 000a 0022     		movs	r2, #0
+  46 000c 4FF40071 		mov	r1, #512
+  47 0010 0148     		ldr	r0, .L3
+  48 0012 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  49              	.LVL2:
+  98:Core/Src/ILI9341_STM32_Driver.c **** }
+  50              		.loc 1 98 1 is_stmt 0 view .LVU4
+  51 0016 08BD     		pop	{r3, pc}
+  52              	.L4:
+  53              		.align	2
+  54              	.L3:
+  55 0018 00000240 		.word	1073872896
+  56              		.cfi_endproc
+  57              	.LFE134:
+  59              		.section	.text.ILI9341_SPI_Send,"ax",%progbits
+  60              		.align	1
+  61              		.global	ILI9341_SPI_Send
+  62              		.syntax unified
+  63              		.thumb
+  64              		.thumb_func
+  66              	ILI9341_SPI_Send:
+  67              	.LVL3:
+  68              	.LFB135:
+  99:Core/Src/ILI9341_STM32_Driver.c **** 
+ 100:Core/Src/ILI9341_STM32_Driver.c **** /*Send data (char) to LCD*/
+ 101:Core/Src/ILI9341_STM32_Driver.c **** void ILI9341_SPI_Send(unsigned char SPI_Data)
+ 102:Core/Src/ILI9341_STM32_Driver.c **** {
+  69              		.loc 1 102 1 is_stmt 1 view -0
+  70              		.cfi_startproc
+  71              		@ args = 0, pretend = 0, frame = 8
+  72              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 4
+
+
+  73              		.loc 1 102 1 is_stmt 0 view .LVU6
+  74 0000 00B5     		push	{lr}
+  75              	.LCFI1:
+  76              		.cfi_def_cfa_offset 4
+  77              		.cfi_offset 14, -4
+  78 0002 83B0     		sub	sp, sp, #12
+  79              	.LCFI2:
+  80              		.cfi_def_cfa_offset 16
+  81 0004 8DF80700 		strb	r0, [sp, #7]
+ 103:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, &SPI_Data, 1, 1);
+  82              		.loc 1 103 1 is_stmt 1 view .LVU7
+  83 0008 0123     		movs	r3, #1
+  84 000a 1A46     		mov	r2, r3
+  85 000c 0DF10701 		add	r1, sp, #7
+  86 0010 0248     		ldr	r0, .L7
+  87              	.LVL4:
+  88              		.loc 1 103 1 is_stmt 0 view .LVU8
+  89 0012 FFF7FEFF 		bl	HAL_SPI_Transmit
+  90              	.LVL5:
+ 104:Core/Src/ILI9341_STM32_Driver.c **** }
+  91              		.loc 1 104 1 view .LVU9
+  92 0016 03B0     		add	sp, sp, #12
+  93              	.LCFI3:
+  94              		.cfi_def_cfa_offset 4
+  95              		@ sp needed
+  96 0018 5DF804FB 		ldr	pc, [sp], #4
+  97              	.L8:
+  98              		.align	2
+  99              	.L7:
+ 100 001c 00000000 		.word	hspi1
+ 101              		.cfi_endproc
+ 102              	.LFE135:
+ 104              		.section	.text.ILI9341_Write_Command,"ax",%progbits
+ 105              		.align	1
+ 106              		.global	ILI9341_Write_Command
+ 107              		.syntax unified
+ 108              		.thumb
+ 109              		.thumb_func
+ 111              	ILI9341_Write_Command:
+ 112              	.LVL6:
+ 113              	.LFB136:
+ 105:Core/Src/ILI9341_STM32_Driver.c **** 
+ 106:Core/Src/ILI9341_STM32_Driver.c **** /* Send command (char) to LCD */
+ 107:Core/Src/ILI9341_STM32_Driver.c **** void ILI9341_Write_Command(uint8_t Command)
+ 108:Core/Src/ILI9341_STM32_Driver.c **** {
+ 114              		.loc 1 108 1 is_stmt 1 view -0
+ 115              		.cfi_startproc
+ 116              		@ args = 0, pretend = 0, frame = 0
+ 117              		@ frame_needed = 0, uses_anonymous_args = 0
+ 118              		.loc 1 108 1 is_stmt 0 view .LVU11
+ 119 0000 38B5     		push	{r3, r4, r5, lr}
+ 120              	.LCFI4:
+ 121              		.cfi_def_cfa_offset 16
+ 122              		.cfi_offset 3, -16
+ 123              		.cfi_offset 4, -12
+ 124              		.cfi_offset 5, -8
+ 125              		.cfi_offset 14, -4
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 5
+
+
+ 126 0002 0446     		mov	r4, r0
+ 109:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);
+ 127              		.loc 1 109 1 is_stmt 1 view .LVU12
+ 128 0004 0A4D     		ldr	r5, .L11
+ 129 0006 0022     		movs	r2, #0
+ 130 0008 4FF40071 		mov	r1, #512
+ 131 000c 2846     		mov	r0, r5
+ 132              	.LVL7:
+ 133              		.loc 1 109 1 is_stmt 0 view .LVU13
+ 134 000e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 135              	.LVL8:
+ 110:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_DC_PORT, LCD_DC_PIN, GPIO_PIN_RESET);	
+ 136              		.loc 1 110 1 is_stmt 1 view .LVU14
+ 137 0012 0022     		movs	r2, #0
+ 138 0014 4021     		movs	r1, #64
+ 139 0016 0748     		ldr	r0, .L11+4
+ 140 0018 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 141              	.LVL9:
+ 111:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_SPI_Send(Command);
+ 142              		.loc 1 111 1 view .LVU15
+ 143 001c 2046     		mov	r0, r4
+ 144 001e FFF7FEFF 		bl	ILI9341_SPI_Send
+ 145              	.LVL10:
+ 112:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_SET);		
+ 146              		.loc 1 112 1 view .LVU16
+ 147 0022 0122     		movs	r2, #1
+ 148 0024 4FF40071 		mov	r1, #512
+ 149 0028 2846     		mov	r0, r5
+ 150 002a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 151              	.LVL11:
+ 113:Core/Src/ILI9341_STM32_Driver.c **** }
+ 152              		.loc 1 113 1 is_stmt 0 view .LVU17
+ 153 002e 38BD     		pop	{r3, r4, r5, pc}
+ 154              	.L12:
+ 155              		.align	2
+ 156              	.L11:
+ 157 0030 00000240 		.word	1073872896
+ 158 0034 00040240 		.word	1073873920
+ 159              		.cfi_endproc
+ 160              	.LFE136:
+ 162              		.section	.text.ILI9341_Write_Data,"ax",%progbits
+ 163              		.align	1
+ 164              		.global	ILI9341_Write_Data
+ 165              		.syntax unified
+ 166              		.thumb
+ 167              		.thumb_func
+ 169              	ILI9341_Write_Data:
+ 170              	.LVL12:
+ 171              	.LFB137:
+ 114:Core/Src/ILI9341_STM32_Driver.c **** 
+ 115:Core/Src/ILI9341_STM32_Driver.c **** /* Send Data (char) to LCD */
+ 116:Core/Src/ILI9341_STM32_Driver.c **** void ILI9341_Write_Data(uint8_t Data)
+ 117:Core/Src/ILI9341_STM32_Driver.c **** {
+ 172              		.loc 1 117 1 is_stmt 1 view -0
+ 173              		.cfi_startproc
+ 174              		@ args = 0, pretend = 0, frame = 0
+ 175              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 6
+
+
+ 176              		.loc 1 117 1 is_stmt 0 view .LVU19
+ 177 0000 38B5     		push	{r3, r4, r5, lr}
+ 178              	.LCFI5:
+ 179              		.cfi_def_cfa_offset 16
+ 180              		.cfi_offset 3, -16
+ 181              		.cfi_offset 4, -12
+ 182              		.cfi_offset 5, -8
+ 183              		.cfi_offset 14, -4
+ 184 0002 0446     		mov	r4, r0
+ 118:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_DC_PORT, LCD_DC_PIN, GPIO_PIN_SET);	
+ 185              		.loc 1 118 1 is_stmt 1 view .LVU20
+ 186 0004 0122     		movs	r2, #1
+ 187 0006 4021     		movs	r1, #64
+ 188 0008 0948     		ldr	r0, .L15
+ 189              	.LVL13:
+ 190              		.loc 1 118 1 is_stmt 0 view .LVU21
+ 191 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 192              	.LVL14:
+ 119:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);
+ 193              		.loc 1 119 1 is_stmt 1 view .LVU22
+ 194 000e 094D     		ldr	r5, .L15+4
+ 195 0010 0022     		movs	r2, #0
+ 196 0012 4FF40071 		mov	r1, #512
+ 197 0016 2846     		mov	r0, r5
+ 198 0018 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 199              	.LVL15:
+ 120:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_SPI_Send(Data);	
+ 200              		.loc 1 120 1 view .LVU23
+ 201 001c 2046     		mov	r0, r4
+ 202 001e FFF7FEFF 		bl	ILI9341_SPI_Send
+ 203              	.LVL16:
+ 121:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_SET);
+ 204              		.loc 1 121 1 view .LVU24
+ 205 0022 0122     		movs	r2, #1
+ 206 0024 4FF40071 		mov	r1, #512
+ 207 0028 2846     		mov	r0, r5
+ 208 002a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 209              	.LVL17:
+ 122:Core/Src/ILI9341_STM32_Driver.c **** }
+ 210              		.loc 1 122 1 is_stmt 0 view .LVU25
+ 211 002e 38BD     		pop	{r3, r4, r5, pc}
+ 212              	.L16:
+ 213              		.align	2
+ 214              	.L15:
+ 215 0030 00040240 		.word	1073873920
+ 216 0034 00000240 		.word	1073872896
+ 217              		.cfi_endproc
+ 218              	.LFE137:
+ 220              		.section	.text.ILI9341_Set_Address,"ax",%progbits
+ 221              		.align	1
+ 222              		.global	ILI9341_Set_Address
+ 223              		.syntax unified
+ 224              		.thumb
+ 225              		.thumb_func
+ 227              	ILI9341_Set_Address:
+ 228              	.LVL18:
+ 229              	.LFB138:
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 7
+
+
+ 123:Core/Src/ILI9341_STM32_Driver.c **** 
+ 124:Core/Src/ILI9341_STM32_Driver.c **** /* Set Address - Location block - to draw into */
+ 125:Core/Src/ILI9341_STM32_Driver.c **** void ILI9341_Set_Address(uint16_t X1, uint16_t Y1, uint16_t X2, uint16_t Y2)
+ 126:Core/Src/ILI9341_STM32_Driver.c **** {
+ 230              		.loc 1 126 1 is_stmt 1 view -0
+ 231              		.cfi_startproc
+ 232              		@ args = 0, pretend = 0, frame = 0
+ 233              		@ frame_needed = 0, uses_anonymous_args = 0
+ 234              		.loc 1 126 1 is_stmt 0 view .LVU27
+ 235 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 236              	.LCFI6:
+ 237              		.cfi_def_cfa_offset 24
+ 238              		.cfi_offset 3, -24
+ 239              		.cfi_offset 4, -20
+ 240              		.cfi_offset 5, -16
+ 241              		.cfi_offset 6, -12
+ 242              		.cfi_offset 7, -8
+ 243              		.cfi_offset 14, -4
+ 244 0002 0746     		mov	r7, r0
+ 245 0004 0D46     		mov	r5, r1
+ 246 0006 1646     		mov	r6, r2
+ 247 0008 1C46     		mov	r4, r3
+ 127:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Write_Command(0x2A);
+ 248              		.loc 1 127 1 is_stmt 1 view .LVU28
+ 249 000a 2A20     		movs	r0, #42
+ 250              	.LVL19:
+ 251              		.loc 1 127 1 is_stmt 0 view .LVU29
+ 252 000c FFF7FEFF 		bl	ILI9341_Write_Command
+ 253              	.LVL20:
+ 128:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Write_Data(X1>>8);
+ 254              		.loc 1 128 1 is_stmt 1 view .LVU30
+ 255 0010 380A     		lsrs	r0, r7, #8
+ 256 0012 FFF7FEFF 		bl	ILI9341_Write_Data
+ 257              	.LVL21:
+ 129:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Write_Data(X1);
+ 258              		.loc 1 129 1 view .LVU31
+ 259 0016 F8B2     		uxtb	r0, r7
+ 260 0018 FFF7FEFF 		bl	ILI9341_Write_Data
+ 261              	.LVL22:
+ 130:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Write_Data(X2>>8);
+ 262              		.loc 1 130 1 view .LVU32
+ 263 001c 300A     		lsrs	r0, r6, #8
+ 264 001e FFF7FEFF 		bl	ILI9341_Write_Data
+ 265              	.LVL23:
+ 131:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Write_Data(X2);
+ 266              		.loc 1 131 1 view .LVU33
+ 267 0022 F0B2     		uxtb	r0, r6
+ 268 0024 FFF7FEFF 		bl	ILI9341_Write_Data
+ 269              	.LVL24:
+ 132:Core/Src/ILI9341_STM32_Driver.c **** 
+ 133:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Write_Command(0x2B);
+ 270              		.loc 1 133 1 view .LVU34
+ 271 0028 2B20     		movs	r0, #43
+ 272 002a FFF7FEFF 		bl	ILI9341_Write_Command
+ 273              	.LVL25:
+ 134:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Write_Data(Y1>>8);
+ 274              		.loc 1 134 1 view .LVU35
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 8
+
+
+ 275 002e 280A     		lsrs	r0, r5, #8
+ 276 0030 FFF7FEFF 		bl	ILI9341_Write_Data
+ 277              	.LVL26:
+ 135:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Write_Data(Y1);
+ 278              		.loc 1 135 1 view .LVU36
+ 279 0034 E8B2     		uxtb	r0, r5
+ 280 0036 FFF7FEFF 		bl	ILI9341_Write_Data
+ 281              	.LVL27:
+ 136:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Write_Data(Y2>>8);
+ 282              		.loc 1 136 1 view .LVU37
+ 283 003a 200A     		lsrs	r0, r4, #8
+ 284 003c FFF7FEFF 		bl	ILI9341_Write_Data
+ 285              	.LVL28:
+ 137:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Write_Data(Y2);
+ 286              		.loc 1 137 1 view .LVU38
+ 287 0040 E0B2     		uxtb	r0, r4
+ 288 0042 FFF7FEFF 		bl	ILI9341_Write_Data
+ 289              	.LVL29:
+ 138:Core/Src/ILI9341_STM32_Driver.c **** 
+ 139:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Write_Command(0x2C);
+ 290              		.loc 1 139 1 view .LVU39
+ 291 0046 2C20     		movs	r0, #44
+ 292 0048 FFF7FEFF 		bl	ILI9341_Write_Command
+ 293              	.LVL30:
+ 140:Core/Src/ILI9341_STM32_Driver.c **** }
+ 294              		.loc 1 140 1 is_stmt 0 view .LVU40
+ 295 004c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 296              		.cfi_endproc
+ 297              	.LFE138:
+ 299              		.section	.text.ILI9341_Reset,"ax",%progbits
+ 300              		.align	1
+ 301              		.global	ILI9341_Reset
+ 302              		.syntax unified
+ 303              		.thumb
+ 304              		.thumb_func
+ 306              	ILI9341_Reset:
+ 307              	.LFB139:
+ 141:Core/Src/ILI9341_STM32_Driver.c **** 
+ 142:Core/Src/ILI9341_STM32_Driver.c **** /*HARDWARE RESET*/
+ 143:Core/Src/ILI9341_STM32_Driver.c **** void ILI9341_Reset(void)
+ 144:Core/Src/ILI9341_STM32_Driver.c **** {
+ 308              		.loc 1 144 1 is_stmt 1 view -0
+ 309              		.cfi_startproc
+ 310              		@ args = 0, pretend = 0, frame = 0
+ 311              		@ frame_needed = 0, uses_anonymous_args = 0
+ 312 0000 10B5     		push	{r4, lr}
+ 313              	.LCFI7:
+ 314              		.cfi_def_cfa_offset 8
+ 315              		.cfi_offset 4, -8
+ 316              		.cfi_offset 14, -4
+ 145:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_RST_PORT, LCD_RST_PIN, GPIO_PIN_RESET);
+ 317              		.loc 1 145 1 view .LVU42
+ 318 0002 0C4C     		ldr	r4, .L21
+ 319 0004 0022     		movs	r2, #0
+ 320 0006 8021     		movs	r1, #128
+ 321 0008 2046     		mov	r0, r4
+ 322 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 9
+
+
+ 323              	.LVL31:
+ 146:Core/Src/ILI9341_STM32_Driver.c **** HAL_Delay(200);
+ 324              		.loc 1 146 1 view .LVU43
+ 325 000e C820     		movs	r0, #200
+ 326 0010 FFF7FEFF 		bl	HAL_Delay
+ 327              	.LVL32:
+ 147:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);
+ 328              		.loc 1 147 1 view .LVU44
+ 329 0014 0022     		movs	r2, #0
+ 330 0016 4FF40071 		mov	r1, #512
+ 331 001a 0748     		ldr	r0, .L21+4
+ 332 001c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 333              	.LVL33:
+ 148:Core/Src/ILI9341_STM32_Driver.c **** HAL_Delay(200);
+ 334              		.loc 1 148 1 view .LVU45
+ 335 0020 C820     		movs	r0, #200
+ 336 0022 FFF7FEFF 		bl	HAL_Delay
+ 337              	.LVL34:
+ 149:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_RST_PORT, LCD_RST_PIN, GPIO_PIN_SET);	
+ 338              		.loc 1 149 1 view .LVU46
+ 339 0026 0122     		movs	r2, #1
+ 340 0028 8021     		movs	r1, #128
+ 341 002a 2046     		mov	r0, r4
+ 342 002c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 343              	.LVL35:
+ 150:Core/Src/ILI9341_STM32_Driver.c **** }
+ 344              		.loc 1 150 1 is_stmt 0 view .LVU47
+ 345 0030 10BD     		pop	{r4, pc}
+ 346              	.L22:
+ 347 0032 00BF     		.align	2
+ 348              	.L21:
+ 349 0034 00080240 		.word	1073874944
+ 350 0038 00000240 		.word	1073872896
+ 351              		.cfi_endproc
+ 352              	.LFE139:
+ 354              		.section	.text.ILI9341_Set_Rotation,"ax",%progbits
+ 355              		.align	1
+ 356              		.global	ILI9341_Set_Rotation
+ 357              		.syntax unified
+ 358              		.thumb
+ 359              		.thumb_func
+ 361              	ILI9341_Set_Rotation:
+ 362              	.LVL36:
+ 363              	.LFB140:
+ 151:Core/Src/ILI9341_STM32_Driver.c **** 
+ 152:Core/Src/ILI9341_STM32_Driver.c **** /*Ser rotation of the screen - changes x0 and y0*/
+ 153:Core/Src/ILI9341_STM32_Driver.c **** void ILI9341_Set_Rotation(uint8_t Rotation) 
+ 154:Core/Src/ILI9341_STM32_Driver.c **** {
+ 364              		.loc 1 154 1 is_stmt 1 view -0
+ 365              		.cfi_startproc
+ 366              		@ args = 0, pretend = 0, frame = 0
+ 367              		@ frame_needed = 0, uses_anonymous_args = 0
+ 368              		.loc 1 154 1 is_stmt 0 view .LVU49
+ 369 0000 10B5     		push	{r4, lr}
+ 370              	.LCFI8:
+ 371              		.cfi_def_cfa_offset 8
+ 372              		.cfi_offset 4, -8
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 10
+
+
+ 373              		.cfi_offset 14, -4
+ 374 0002 0446     		mov	r4, r0
+ 155:Core/Src/ILI9341_STM32_Driver.c **** 	
+ 156:Core/Src/ILI9341_STM32_Driver.c **** uint8_t screen_rotation = Rotation;
+ 375              		.loc 1 156 1 is_stmt 1 view .LVU50
+ 376              	.LVL37:
+ 157:Core/Src/ILI9341_STM32_Driver.c **** 
+ 158:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Write_Command(0x36);
+ 377              		.loc 1 158 1 view .LVU51
+ 378 0004 3620     		movs	r0, #54
+ 379              	.LVL38:
+ 380              		.loc 1 158 1 is_stmt 0 view .LVU52
+ 381 0006 FFF7FEFF 		bl	ILI9341_Write_Command
+ 382              	.LVL39:
+ 159:Core/Src/ILI9341_STM32_Driver.c **** HAL_Delay(1);
+ 383              		.loc 1 159 1 is_stmt 1 view .LVU53
+ 384 000a 0120     		movs	r0, #1
+ 385 000c FFF7FEFF 		bl	HAL_Delay
+ 386              	.LVL40:
+ 160:Core/Src/ILI9341_STM32_Driver.c **** 	
+ 161:Core/Src/ILI9341_STM32_Driver.c **** switch(screen_rotation) 
+ 387              		.loc 1 161 1 view .LVU54
+ 388 0010 032C     		cmp	r4, #3
+ 389 0012 0DD8     		bhi	.L23
+ 390 0014 DFE804F0 		tbb	[pc, r4]
+ 391              	.L26:
+ 392 0018 02       		.byte	(.L29-.L26)/2
+ 393 0019 0D       		.byte	(.L28-.L26)/2
+ 394 001a 18       		.byte	(.L27-.L26)/2
+ 395 001b 23       		.byte	(.L25-.L26)/2
+ 396              		.p2align 1
+ 397              	.L29:
+ 162:Core/Src/ILI9341_STM32_Driver.c **** 	{
+ 163:Core/Src/ILI9341_STM32_Driver.c **** 		case SCREEN_VERTICAL_1:
+ 164:Core/Src/ILI9341_STM32_Driver.c **** 			ILI9341_Write_Data(0x40|0x08);
+ 398              		.loc 1 164 4 view .LVU55
+ 399 001c 4820     		movs	r0, #72
+ 400 001e FFF7FEFF 		bl	ILI9341_Write_Data
+ 401              	.LVL41:
+ 165:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_WIDTH = 240;
+ 402              		.loc 1 165 4 view .LVU56
+ 403              		.loc 1 165 14 is_stmt 0 view .LVU57
+ 404 0022 144B     		ldr	r3, .L31
+ 405 0024 F022     		movs	r2, #240
+ 406 0026 1A80     		strh	r2, [r3]	@ movhi
+ 166:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_HEIGHT = 320;
+ 407              		.loc 1 166 4 is_stmt 1 view .LVU58
+ 408              		.loc 1 166 15 is_stmt 0 view .LVU59
+ 409 0028 134B     		ldr	r3, .L31+4
+ 410 002a 4FF4A072 		mov	r2, #320
+ 411 002e 1A80     		strh	r2, [r3]	@ movhi
+ 167:Core/Src/ILI9341_STM32_Driver.c **** 			break;
+ 412              		.loc 1 167 4 is_stmt 1 view .LVU60
+ 413              	.L23:
+ 168:Core/Src/ILI9341_STM32_Driver.c **** 		case SCREEN_HORIZONTAL_1:
+ 169:Core/Src/ILI9341_STM32_Driver.c **** 			ILI9341_Write_Data(0x20|0x08);
+ 170:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_WIDTH  = 320;
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 11
+
+
+ 171:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_HEIGHT = 240;
+ 172:Core/Src/ILI9341_STM32_Driver.c **** 			break;
+ 173:Core/Src/ILI9341_STM32_Driver.c **** 		case SCREEN_VERTICAL_2:
+ 174:Core/Src/ILI9341_STM32_Driver.c **** 			ILI9341_Write_Data(0x80|0x08);
+ 175:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_WIDTH  = 240;
+ 176:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_HEIGHT = 320;
+ 177:Core/Src/ILI9341_STM32_Driver.c **** 			break;
+ 178:Core/Src/ILI9341_STM32_Driver.c **** 		case SCREEN_HORIZONTAL_2:
+ 179:Core/Src/ILI9341_STM32_Driver.c **** 			ILI9341_Write_Data(0x40|0x80|0x20|0x08);
+ 180:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_WIDTH  = 320;
+ 181:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_HEIGHT = 240;
+ 182:Core/Src/ILI9341_STM32_Driver.c **** 			break;
+ 183:Core/Src/ILI9341_STM32_Driver.c **** 		default:
+ 184:Core/Src/ILI9341_STM32_Driver.c **** 			//EXIT IF SCREEN ROTATION NOT VALID!
+ 185:Core/Src/ILI9341_STM32_Driver.c **** 			break;
+ 186:Core/Src/ILI9341_STM32_Driver.c **** 	}
+ 187:Core/Src/ILI9341_STM32_Driver.c **** }
+ 414              		.loc 1 187 1 is_stmt 0 view .LVU61
+ 415 0030 10BD     		pop	{r4, pc}
+ 416              	.LVL42:
+ 417              	.L28:
+ 169:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_WIDTH  = 320;
+ 418              		.loc 1 169 4 is_stmt 1 view .LVU62
+ 419 0032 2820     		movs	r0, #40
+ 420 0034 FFF7FEFF 		bl	ILI9341_Write_Data
+ 421              	.LVL43:
+ 170:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_HEIGHT = 240;
+ 422              		.loc 1 170 4 view .LVU63
+ 170:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_HEIGHT = 240;
+ 423              		.loc 1 170 15 is_stmt 0 view .LVU64
+ 424 0038 0E4B     		ldr	r3, .L31
+ 425 003a 4FF4A072 		mov	r2, #320
+ 426 003e 1A80     		strh	r2, [r3]	@ movhi
+ 171:Core/Src/ILI9341_STM32_Driver.c **** 			break;
+ 427              		.loc 1 171 4 is_stmt 1 view .LVU65
+ 171:Core/Src/ILI9341_STM32_Driver.c **** 			break;
+ 428              		.loc 1 171 15 is_stmt 0 view .LVU66
+ 429 0040 0D4B     		ldr	r3, .L31+4
+ 430 0042 F022     		movs	r2, #240
+ 431 0044 1A80     		strh	r2, [r3]	@ movhi
+ 172:Core/Src/ILI9341_STM32_Driver.c **** 		case SCREEN_VERTICAL_2:
+ 432              		.loc 1 172 4 is_stmt 1 view .LVU67
+ 433 0046 F3E7     		b	.L23
+ 434              	.L27:
+ 174:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_WIDTH  = 240;
+ 435              		.loc 1 174 4 view .LVU68
+ 436 0048 8820     		movs	r0, #136
+ 437 004a FFF7FEFF 		bl	ILI9341_Write_Data
+ 438              	.LVL44:
+ 175:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_HEIGHT = 320;
+ 439              		.loc 1 175 4 view .LVU69
+ 175:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_HEIGHT = 320;
+ 440              		.loc 1 175 15 is_stmt 0 view .LVU70
+ 441 004e 094B     		ldr	r3, .L31
+ 442 0050 F022     		movs	r2, #240
+ 443 0052 1A80     		strh	r2, [r3]	@ movhi
+ 176:Core/Src/ILI9341_STM32_Driver.c **** 			break;
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 12
+
+
+ 444              		.loc 1 176 4 is_stmt 1 view .LVU71
+ 176:Core/Src/ILI9341_STM32_Driver.c **** 			break;
+ 445              		.loc 1 176 15 is_stmt 0 view .LVU72
+ 446 0054 084B     		ldr	r3, .L31+4
+ 447 0056 4FF4A072 		mov	r2, #320
+ 448 005a 1A80     		strh	r2, [r3]	@ movhi
+ 177:Core/Src/ILI9341_STM32_Driver.c **** 		case SCREEN_HORIZONTAL_2:
+ 449              		.loc 1 177 4 is_stmt 1 view .LVU73
+ 450 005c E8E7     		b	.L23
+ 451              	.L25:
+ 179:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_WIDTH  = 320;
+ 452              		.loc 1 179 4 view .LVU74
+ 453 005e E820     		movs	r0, #232
+ 454 0060 FFF7FEFF 		bl	ILI9341_Write_Data
+ 455              	.LVL45:
+ 180:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_HEIGHT = 240;
+ 456              		.loc 1 180 4 view .LVU75
+ 180:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_HEIGHT = 240;
+ 457              		.loc 1 180 15 is_stmt 0 view .LVU76
+ 458 0064 034B     		ldr	r3, .L31
+ 459 0066 4FF4A072 		mov	r2, #320
+ 460 006a 1A80     		strh	r2, [r3]	@ movhi
+ 181:Core/Src/ILI9341_STM32_Driver.c **** 			break;
+ 461              		.loc 1 181 4 is_stmt 1 view .LVU77
+ 181:Core/Src/ILI9341_STM32_Driver.c **** 			break;
+ 462              		.loc 1 181 15 is_stmt 0 view .LVU78
+ 463 006c 024B     		ldr	r3, .L31+4
+ 464 006e F022     		movs	r2, #240
+ 465 0070 1A80     		strh	r2, [r3]	@ movhi
+ 182:Core/Src/ILI9341_STM32_Driver.c **** 		default:
+ 466              		.loc 1 182 4 is_stmt 1 view .LVU79
+ 467              		.loc 1 187 1 is_stmt 0 view .LVU80
+ 468 0072 DDE7     		b	.L23
+ 469              	.L32:
+ 470              		.align	2
+ 471              	.L31:
+ 472 0074 00000000 		.word	.LANCHOR0
+ 473 0078 00000000 		.word	.LANCHOR1
+ 474              		.cfi_endproc
+ 475              	.LFE140:
+ 477              		.section	.text.ILI9341_Enable,"ax",%progbits
+ 478              		.align	1
+ 479              		.global	ILI9341_Enable
+ 480              		.syntax unified
+ 481              		.thumb
+ 482              		.thumb_func
+ 484              	ILI9341_Enable:
+ 485              	.LFB141:
+ 188:Core/Src/ILI9341_STM32_Driver.c **** 
+ 189:Core/Src/ILI9341_STM32_Driver.c **** /*Enable LCD display*/
+ 190:Core/Src/ILI9341_STM32_Driver.c **** void ILI9341_Enable(void)
+ 191:Core/Src/ILI9341_STM32_Driver.c **** {
+ 486              		.loc 1 191 1 is_stmt 1 view -0
+ 487              		.cfi_startproc
+ 488              		@ args = 0, pretend = 0, frame = 0
+ 489              		@ frame_needed = 0, uses_anonymous_args = 0
+ 490 0000 08B5     		push	{r3, lr}
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 13
+
+
+ 491              	.LCFI9:
+ 492              		.cfi_def_cfa_offset 8
+ 493              		.cfi_offset 3, -8
+ 494              		.cfi_offset 14, -4
+ 192:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_RST_PORT, LCD_RST_PIN, GPIO_PIN_SET);
+ 495              		.loc 1 192 1 view .LVU82
+ 496 0002 0122     		movs	r2, #1
+ 497 0004 8021     		movs	r1, #128
+ 498 0006 0248     		ldr	r0, .L35
+ 499 0008 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 500              	.LVL46:
+ 193:Core/Src/ILI9341_STM32_Driver.c **** }
+ 501              		.loc 1 193 1 is_stmt 0 view .LVU83
+ 502 000c 08BD     		pop	{r3, pc}
+ 503              	.L36:
+ 504 000e 00BF     		.align	2
+ 505              	.L35:
+ 506 0010 00080240 		.word	1073874944
+ 507              		.cfi_endproc
+ 508              	.LFE141:
+ 510              		.section	.text.ILI9341_Draw_Colour,"ax",%progbits
+ 511              		.align	1
+ 512              		.global	ILI9341_Draw_Colour
+ 513              		.syntax unified
+ 514              		.thumb
+ 515              		.thumb_func
+ 517              	ILI9341_Draw_Colour:
+ 518              	.LVL47:
+ 519              	.LFB142:
+ 194:Core/Src/ILI9341_STM32_Driver.c **** 
+ 195:Core/Src/ILI9341_STM32_Driver.c **** // /*Initialize LCD display*/
+ 196:Core/Src/ILI9341_STM32_Driver.c **** // void ILI9341_Init(void)
+ 197:Core/Src/ILI9341_STM32_Driver.c **** // {
+ 198:Core/Src/ILI9341_STM32_Driver.c **** 
+ 199:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Enable();
+ 200:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_SPI_Init();
+ 201:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Reset();
+ 202:Core/Src/ILI9341_STM32_Driver.c **** 
+ 203:Core/Src/ILI9341_STM32_Driver.c **** // //SOFTWARE RESET
+ 204:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0x01);
+ 205:Core/Src/ILI9341_STM32_Driver.c **** // HAL_Delay(1000);
+ 206:Core/Src/ILI9341_STM32_Driver.c **** 	
+ 207:Core/Src/ILI9341_STM32_Driver.c **** // //POWER CONTROL A
+ 208:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0xCB);
+ 209:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x39);
+ 210:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x2C);
+ 211:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x00);
+ 212:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x34);
+ 213:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x02);
+ 214:Core/Src/ILI9341_STM32_Driver.c **** 
+ 215:Core/Src/ILI9341_STM32_Driver.c **** // //POWER CONTROL B
+ 216:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0xCF);
+ 217:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x00);
+ 218:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0xC1);
+ 219:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x30);
+ 220:Core/Src/ILI9341_STM32_Driver.c **** 
+ 221:Core/Src/ILI9341_STM32_Driver.c **** // //DRIVER TIMING CONTROL A
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 14
+
+
+ 222:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0xE8);
+ 223:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x85);
+ 224:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x00);
+ 225:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x78);
+ 226:Core/Src/ILI9341_STM32_Driver.c **** 
+ 227:Core/Src/ILI9341_STM32_Driver.c **** // //DRIVER TIMING CONTROL B
+ 228:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0xEA);
+ 229:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x00);
+ 230:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x00);
+ 231:Core/Src/ILI9341_STM32_Driver.c **** 
+ 232:Core/Src/ILI9341_STM32_Driver.c **** // //POWER ON SEQUENCE CONTROL
+ 233:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0xED);
+ 234:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x64);
+ 235:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x03);
+ 236:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x12);
+ 237:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x81);
+ 238:Core/Src/ILI9341_STM32_Driver.c **** 
+ 239:Core/Src/ILI9341_STM32_Driver.c **** // //PUMP RATIO CONTROL
+ 240:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0xF7);
+ 241:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x20);
+ 242:Core/Src/ILI9341_STM32_Driver.c **** 
+ 243:Core/Src/ILI9341_STM32_Driver.c **** // //POWER CONTROL,VRH[5:0]
+ 244:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0xC0);
+ 245:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x23);
+ 246:Core/Src/ILI9341_STM32_Driver.c **** 
+ 247:Core/Src/ILI9341_STM32_Driver.c **** // //POWER CONTROL,SAP[2:0];BT[3:0]
+ 248:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0xC1);
+ 249:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x10);
+ 250:Core/Src/ILI9341_STM32_Driver.c **** 
+ 251:Core/Src/ILI9341_STM32_Driver.c **** // //VCM CONTROL
+ 252:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0xC5);
+ 253:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x3E);
+ 254:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x28);
+ 255:Core/Src/ILI9341_STM32_Driver.c **** 
+ 256:Core/Src/ILI9341_STM32_Driver.c **** // //VCM CONTROL 2
+ 257:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0xC7);
+ 258:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x86);
+ 259:Core/Src/ILI9341_STM32_Driver.c **** 
+ 260:Core/Src/ILI9341_STM32_Driver.c **** // //MEMORY ACCESS CONTROL
+ 261:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0x36);
+ 262:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x48);
+ 263:Core/Src/ILI9341_STM32_Driver.c **** 
+ 264:Core/Src/ILI9341_STM32_Driver.c **** // //PIXEL FORMAT
+ 265:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0x3A);
+ 266:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x55);
+ 267:Core/Src/ILI9341_STM32_Driver.c **** 
+ 268:Core/Src/ILI9341_STM32_Driver.c **** // //FRAME RATIO CONTROL, STANDARD RGB COLOR
+ 269:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0xB1);
+ 270:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x00);
+ 271:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x18);
+ 272:Core/Src/ILI9341_STM32_Driver.c **** 
+ 273:Core/Src/ILI9341_STM32_Driver.c **** // //DISPLAY FUNCTION CONTROL
+ 274:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0xB6);
+ 275:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x08);
+ 276:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x82);
+ 277:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x27);
+ 278:Core/Src/ILI9341_STM32_Driver.c **** 
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 15
+
+
+ 279:Core/Src/ILI9341_STM32_Driver.c **** // //3GAMMA FUNCTION DISABLE
+ 280:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0xF2);
+ 281:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x00);
+ 282:Core/Src/ILI9341_STM32_Driver.c **** 
+ 283:Core/Src/ILI9341_STM32_Driver.c **** // //GAMMA CURVE SELECTED
+ 284:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0x26);
+ 285:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x01);
+ 286:Core/Src/ILI9341_STM32_Driver.c **** 
+ 287:Core/Src/ILI9341_STM32_Driver.c **** // //POSITIVE GAMMA CORRECTION
+ 288:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0xE0);
+ 289:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x0F);
+ 290:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x31);
+ 291:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x2B);
+ 292:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x0C);
+ 293:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x0E);
+ 294:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x08);
+ 295:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x4E);
+ 296:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0xF1);
+ 297:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x37);
+ 298:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x07);
+ 299:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x10);
+ 300:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x03);
+ 301:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x0E);
+ 302:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x09);
+ 303:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x00);
+ 304:Core/Src/ILI9341_STM32_Driver.c **** 
+ 305:Core/Src/ILI9341_STM32_Driver.c **** // //NEGATIVE GAMMA CORRECTION
+ 306:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0xE1);
+ 307:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x00);
+ 308:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x0E);
+ 309:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x14);
+ 310:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x03);
+ 311:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x11);
+ 312:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x07);
+ 313:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x31);
+ 314:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0xC1);
+ 315:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x48);
+ 316:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x08);
+ 317:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x0F);
+ 318:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x0C);
+ 319:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x31);
+ 320:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x36);
+ 321:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x0F);
+ 322:Core/Src/ILI9341_STM32_Driver.c **** 
+ 323:Core/Src/ILI9341_STM32_Driver.c **** // //EXIT SLEEP
+ 324:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0x11);
+ 325:Core/Src/ILI9341_STM32_Driver.c **** // HAL_Delay(120);
+ 326:Core/Src/ILI9341_STM32_Driver.c **** 
+ 327:Core/Src/ILI9341_STM32_Driver.c **** // //TURN ON DISPLAY
+ 328:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0x29);
+ 329:Core/Src/ILI9341_STM32_Driver.c **** 
+ 330:Core/Src/ILI9341_STM32_Driver.c **** // //STARTING ROTATION
+ 331:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Set_Rotation(SCREEN_VERTICAL_1);
+ 332:Core/Src/ILI9341_STM32_Driver.c **** // }
+ 333:Core/Src/ILI9341_STM32_Driver.c **** 
+ 334:Core/Src/ILI9341_STM32_Driver.c **** //INTERNAL FUNCTION OF LIBRARY, USAGE NOT RECOMENDED, USE Draw_Pixel INSTEAD
+ 335:Core/Src/ILI9341_STM32_Driver.c **** /*Sends single pixel colour information to LCD*/
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 16
+
+
+ 336:Core/Src/ILI9341_STM32_Driver.c **** void ILI9341_Draw_Colour(uint16_t Colour)
+ 337:Core/Src/ILI9341_STM32_Driver.c **** {
+ 520              		.loc 1 337 1 is_stmt 1 view -0
+ 521              		.cfi_startproc
+ 522              		@ args = 0, pretend = 0, frame = 8
+ 523              		@ frame_needed = 0, uses_anonymous_args = 0
+ 524              		.loc 1 337 1 is_stmt 0 view .LVU85
+ 525 0000 10B5     		push	{r4, lr}
+ 526              	.LCFI10:
+ 527              		.cfi_def_cfa_offset 8
+ 528              		.cfi_offset 4, -8
+ 529              		.cfi_offset 14, -4
+ 530 0002 82B0     		sub	sp, sp, #8
+ 531              	.LCFI11:
+ 532              		.cfi_def_cfa_offset 16
+ 338:Core/Src/ILI9341_STM32_Driver.c **** //SENDS COLOUR
+ 339:Core/Src/ILI9341_STM32_Driver.c **** unsigned char TempBuffer[2] = {Colour>>8, Colour};	
+ 533              		.loc 1 339 1 is_stmt 1 view .LVU86
+ 534              		.loc 1 339 15 is_stmt 0 view .LVU87
+ 535 0004 030A     		lsrs	r3, r0, #8
+ 536 0006 8DF80430 		strb	r3, [sp, #4]
+ 537 000a 8DF80500 		strb	r0, [sp, #5]
+ 340:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_DC_PORT, LCD_DC_PIN, GPIO_PIN_SET);	
+ 538              		.loc 1 340 1 is_stmt 1 view .LVU88
+ 539 000e 0122     		movs	r2, #1
+ 540 0010 4021     		movs	r1, #64
+ 541 0012 0C48     		ldr	r0, .L39
+ 542              	.LVL48:
+ 543              		.loc 1 340 1 is_stmt 0 view .LVU89
+ 544 0014 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 545              	.LVL49:
+ 341:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);
+ 546              		.loc 1 341 1 is_stmt 1 view .LVU90
+ 547 0018 0B4C     		ldr	r4, .L39+4
+ 548 001a 0022     		movs	r2, #0
+ 549 001c 4FF40071 		mov	r1, #512
+ 550 0020 2046     		mov	r0, r4
+ 551 0022 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 552              	.LVL50:
+ 342:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, TempBuffer, 2, 1);	
+ 553              		.loc 1 342 1 view .LVU91
+ 554 0026 0123     		movs	r3, #1
+ 555 0028 0222     		movs	r2, #2
+ 556 002a 01A9     		add	r1, sp, #4
+ 557 002c 0748     		ldr	r0, .L39+8
+ 558 002e FFF7FEFF 		bl	HAL_SPI_Transmit
+ 559              	.LVL51:
+ 343:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_SET);
+ 560              		.loc 1 343 1 view .LVU92
+ 561 0032 0122     		movs	r2, #1
+ 562 0034 4FF40071 		mov	r1, #512
+ 563 0038 2046     		mov	r0, r4
+ 564 003a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 565              	.LVL52:
+ 344:Core/Src/ILI9341_STM32_Driver.c **** }
+ 566              		.loc 1 344 1 is_stmt 0 view .LVU93
+ 567 003e 02B0     		add	sp, sp, #8
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 17
+
+
+ 568              	.LCFI12:
+ 569              		.cfi_def_cfa_offset 8
+ 570              		@ sp needed
+ 571 0040 10BD     		pop	{r4, pc}
+ 572              	.L40:
+ 573 0042 00BF     		.align	2
+ 574              	.L39:
+ 575 0044 00040240 		.word	1073873920
+ 576 0048 00000240 		.word	1073872896
+ 577 004c 00000000 		.word	hspi1
+ 578              		.cfi_endproc
+ 579              	.LFE142:
+ 581              		.section	.text.ILI9341_Draw_Colour_Burst,"ax",%progbits
+ 582              		.align	1
+ 583              		.global	ILI9341_Draw_Colour_Burst
+ 584              		.syntax unified
+ 585              		.thumb
+ 586              		.thumb_func
+ 588              	ILI9341_Draw_Colour_Burst:
+ 589              	.LVL53:
+ 590              	.LFB143:
+ 345:Core/Src/ILI9341_STM32_Driver.c **** 
+ 346:Core/Src/ILI9341_STM32_Driver.c **** //INTERNAL FUNCTION OF LIBRARY
+ 347:Core/Src/ILI9341_STM32_Driver.c **** /*Sends block colour information to LCD*/
+ 348:Core/Src/ILI9341_STM32_Driver.c **** void ILI9341_Draw_Colour_Burst(uint16_t Colour, uint32_t Size)
+ 349:Core/Src/ILI9341_STM32_Driver.c **** {
+ 591              		.loc 1 349 1 is_stmt 1 view -0
+ 592              		.cfi_startproc
+ 593              		@ args = 0, pretend = 0, frame = 0
+ 594              		@ frame_needed = 1, uses_anonymous_args = 0
+ 595              		.loc 1 349 1 is_stmt 0 view .LVU95
+ 596 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 597              	.LCFI13:
+ 598              		.cfi_def_cfa_offset 32
+ 599              		.cfi_offset 4, -32
+ 600              		.cfi_offset 5, -28
+ 601              		.cfi_offset 6, -24
+ 602              		.cfi_offset 7, -20
+ 603              		.cfi_offset 8, -16
+ 604              		.cfi_offset 9, -12
+ 605              		.cfi_offset 10, -8
+ 606              		.cfi_offset 14, -4
+ 607 0004 00AF     		add	r7, sp, #0
+ 608              	.LCFI14:
+ 609              		.cfi_def_cfa_register 7
+ 610 0006 0646     		mov	r6, r0
+ 611 0008 0D46     		mov	r5, r1
+ 350:Core/Src/ILI9341_STM32_Driver.c **** //SENDS COLOUR
+ 351:Core/Src/ILI9341_STM32_Driver.c **** uint32_t Buffer_Size = 0;
+ 612              		.loc 1 351 1 is_stmt 1 view .LVU96
+ 613              	.LVL54:
+ 352:Core/Src/ILI9341_STM32_Driver.c **** if((Size*2) < BURST_MAX_SIZE)
+ 614              		.loc 1 352 1 view .LVU97
+ 615              		.loc 1 352 9 is_stmt 0 view .LVU98
+ 616 000a 4FEA4108 		lsl	r8, r1, #1
+ 617              		.loc 1 352 3 view .LVU99
+ 618 000e B8F5FA7F 		cmp	r8, #500
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 18
+
+
+ 619 0012 01D3     		bcc	.L42
+ 353:Core/Src/ILI9341_STM32_Driver.c **** {
+ 354:Core/Src/ILI9341_STM32_Driver.c **** 	Buffer_Size = Size;
+ 355:Core/Src/ILI9341_STM32_Driver.c **** }
+ 356:Core/Src/ILI9341_STM32_Driver.c **** else
+ 357:Core/Src/ILI9341_STM32_Driver.c **** {
+ 358:Core/Src/ILI9341_STM32_Driver.c **** 	Buffer_Size = BURST_MAX_SIZE;
+ 620              		.loc 1 358 14 view .LVU100
+ 621 0014 4FF4FA75 		mov	r5, #500
+ 622              	.L42:
+ 623              	.LVL55:
+ 359:Core/Src/ILI9341_STM32_Driver.c **** }
+ 360:Core/Src/ILI9341_STM32_Driver.c **** 	
+ 361:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_DC_PORT, LCD_DC_PIN, GPIO_PIN_SET);	
+ 624              		.loc 1 361 1 is_stmt 1 view .LVU101
+ 625 0018 0122     		movs	r2, #1
+ 626 001a 4021     		movs	r1, #64
+ 627              	.LVL56:
+ 628              		.loc 1 361 1 is_stmt 0 view .LVU102
+ 629 001c 1C48     		ldr	r0, .L51
+ 630              	.LVL57:
+ 631              		.loc 1 361 1 view .LVU103
+ 632 001e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 633              	.LVL58:
+ 362:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);
+ 634              		.loc 1 362 1 is_stmt 1 view .LVU104
+ 635 0022 0022     		movs	r2, #0
+ 636 0024 4FF40071 		mov	r1, #512
+ 637 0028 1A48     		ldr	r0, .L51+4
+ 638 002a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 639              	.LVL59:
+ 363:Core/Src/ILI9341_STM32_Driver.c **** 
+ 364:Core/Src/ILI9341_STM32_Driver.c **** unsigned char chifted = 	Colour>>8;;
+ 640              		.loc 1 364 1 view .LVU105
+ 641              		.loc 1 364 15 is_stmt 0 view .LVU106
+ 642 002e 310A     		lsrs	r1, r6, #8
+ 643              	.LVL60:
+ 644              		.loc 1 364 36 is_stmt 1 view .LVU107
+ 365:Core/Src/ILI9341_STM32_Driver.c **** unsigned char burst_buffer[Buffer_Size];
+ 645              		.loc 1 365 1 view .LVU108
+ 646              		.loc 1 365 15 is_stmt 0 view .LVU109
+ 647 0030 EB1D     		adds	r3, r5, #7
+ 648 0032 23F00703 		bic	r3, r3, #7
+ 649 0036 ADEB030D 		sub	sp, sp, r3
+ 650 003a 6C46     		mov	r4, sp
+ 651              	.LVL61:
+ 366:Core/Src/ILI9341_STM32_Driver.c **** for(uint32_t j = 0; j < Buffer_Size; j+=2)
+ 652              		.loc 1 366 1 is_stmt 1 view .LVU110
+ 653              	.LBB2:
+ 654              		.loc 1 366 5 view .LVU111
+ 655              		.loc 1 366 14 is_stmt 0 view .LVU112
+ 656 003c 0023     		movs	r3, #0
+ 657              		.loc 1 366 1 view .LVU113
+ 658 003e 03E0     		b	.L43
+ 659              	.LVL62:
+ 660              	.L44:
+ 367:Core/Src/ILI9341_STM32_Driver.c **** 	{
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 19
+
+
+ 368:Core/Src/ILI9341_STM32_Driver.c **** 		burst_buffer[j] = 	chifted;
+ 661              		.loc 1 368 3 is_stmt 1 discriminator 3 view .LVU114
+ 662              		.loc 1 368 19 is_stmt 0 discriminator 3 view .LVU115
+ 663 0040 E154     		strb	r1, [r4, r3]
+ 369:Core/Src/ILI9341_STM32_Driver.c **** 		burst_buffer[j+1] = Colour;
+ 664              		.loc 1 369 3 is_stmt 1 discriminator 3 view .LVU116
+ 665              		.loc 1 369 17 is_stmt 0 discriminator 3 view .LVU117
+ 666 0042 5A1C     		adds	r2, r3, #1
+ 667              		.loc 1 369 21 discriminator 3 view .LVU118
+ 668 0044 A654     		strb	r6, [r4, r2]
+ 366:Core/Src/ILI9341_STM32_Driver.c **** for(uint32_t j = 0; j < Buffer_Size; j+=2)
+ 669              		.loc 1 366 38 is_stmt 1 discriminator 3 view .LVU119
+ 366:Core/Src/ILI9341_STM32_Driver.c **** for(uint32_t j = 0; j < Buffer_Size; j+=2)
+ 670              		.loc 1 366 39 is_stmt 0 discriminator 3 view .LVU120
+ 671 0046 0233     		adds	r3, r3, #2
+ 672              	.LVL63:
+ 673              	.L43:
+ 366:Core/Src/ILI9341_STM32_Driver.c **** for(uint32_t j = 0; j < Buffer_Size; j+=2)
+ 674              		.loc 1 366 21 is_stmt 1 discriminator 1 view .LVU121
+ 366:Core/Src/ILI9341_STM32_Driver.c **** for(uint32_t j = 0; j < Buffer_Size; j+=2)
+ 675              		.loc 1 366 1 is_stmt 0 discriminator 1 view .LVU122
+ 676 0048 AB42     		cmp	r3, r5
+ 677 004a F9D3     		bcc	.L44
+ 678              	.LBE2:
+ 370:Core/Src/ILI9341_STM32_Driver.c **** 	}
+ 371:Core/Src/ILI9341_STM32_Driver.c **** 
+ 372:Core/Src/ILI9341_STM32_Driver.c **** uint32_t Sending_Size = Size*2;
+ 679              		.loc 1 372 1 is_stmt 1 view .LVU123
+ 680              	.LVL64:
+ 373:Core/Src/ILI9341_STM32_Driver.c **** uint32_t Sending_in_Block = Sending_Size/Buffer_Size;
+ 681              		.loc 1 373 1 view .LVU124
+ 682              		.loc 1 373 10 is_stmt 0 view .LVU125
+ 683 004c B8FBF5F9 		udiv	r9, r8, r5
+ 684              	.LVL65:
+ 374:Core/Src/ILI9341_STM32_Driver.c **** uint32_t Remainder_from_block = Sending_Size%Buffer_Size;
+ 685              		.loc 1 374 1 is_stmt 1 view .LVU126
+ 686              		.loc 1 374 10 is_stmt 0 view .LVU127
+ 687 0050 05FB198A 		mls	r10, r5, r9, r8
+ 688              	.LVL66:
+ 375:Core/Src/ILI9341_STM32_Driver.c **** 
+ 376:Core/Src/ILI9341_STM32_Driver.c **** if(Sending_in_Block != 0)
+ 689              		.loc 1 376 1 is_stmt 1 view .LVU128
+ 690              		.loc 1 376 3 is_stmt 0 view .LVU129
+ 691 0054 A845     		cmp	r8, r5
+ 692 0056 0FD2     		bcs	.L49
+ 693              	.LVL67:
+ 694              	.L46:
+ 377:Core/Src/ILI9341_STM32_Driver.c **** {
+ 378:Core/Src/ILI9341_STM32_Driver.c **** 	for(uint32_t j = 0; j < (Sending_in_Block); j++)
+ 379:Core/Src/ILI9341_STM32_Driver.c **** 		{
+ 380:Core/Src/ILI9341_STM32_Driver.c **** 		HAL_SPI_Transmit(HSPI_INSTANCE, (unsigned char *)burst_buffer, Buffer_Size, 10);	
+ 381:Core/Src/ILI9341_STM32_Driver.c **** 		}
+ 382:Core/Src/ILI9341_STM32_Driver.c **** }
+ 383:Core/Src/ILI9341_STM32_Driver.c **** 
+ 384:Core/Src/ILI9341_STM32_Driver.c **** //REMAINDER!
+ 385:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, (unsigned char *)burst_buffer, Remainder_from_block, 10);	
+ 695              		.loc 1 385 1 is_stmt 1 view .LVU130
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 20
+
+
+ 696 0058 0A23     		movs	r3, #10
+ 697 005a 1FFA8AF2 		uxth	r2, r10
+ 698 005e 2146     		mov	r1, r4
+ 699 0060 0D48     		ldr	r0, .L51+8
+ 700 0062 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 701              	.LVL68:
+ 386:Core/Src/ILI9341_STM32_Driver.c **** 	
+ 387:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_SET);
+ 702              		.loc 1 387 1 view .LVU131
+ 703 0066 0122     		movs	r2, #1
+ 704 0068 4FF40071 		mov	r1, #512
+ 705 006c 0948     		ldr	r0, .L51+4
+ 706 006e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 707              	.LVL69:
+ 388:Core/Src/ILI9341_STM32_Driver.c **** }
+ 708              		.loc 1 388 1 is_stmt 0 view .LVU132
+ 709 0072 BD46     		mov	sp, r7
+ 710              	.LCFI15:
+ 711              		.cfi_remember_state
+ 712              		.cfi_def_cfa_register 13
+ 713              		@ sp needed
+ 714 0074 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 715              	.LVL70:
+ 716              	.L49:
+ 717              	.LCFI16:
+ 718              		.cfi_restore_state
+ 719              	.LBB3:
+ 378:Core/Src/ILI9341_STM32_Driver.c **** 		{
+ 720              		.loc 1 378 15 view .LVU133
+ 721 0078 0026     		movs	r6, #0
+ 722              	.LVL71:
+ 723              	.L45:
+ 378:Core/Src/ILI9341_STM32_Driver.c **** 		{
+ 724              		.loc 1 378 22 is_stmt 1 discriminator 1 view .LVU134
+ 378:Core/Src/ILI9341_STM32_Driver.c **** 		{
+ 725              		.loc 1 378 2 is_stmt 0 discriminator 1 view .LVU135
+ 726 007a 4E45     		cmp	r6, r9
+ 727 007c ECD2     		bcs	.L46
+ 380:Core/Src/ILI9341_STM32_Driver.c **** 		}
+ 728              		.loc 1 380 3 is_stmt 1 discriminator 3 view .LVU136
+ 729 007e 0A23     		movs	r3, #10
+ 730 0080 AAB2     		uxth	r2, r5
+ 731 0082 2146     		mov	r1, r4
+ 732 0084 0448     		ldr	r0, .L51+8
+ 733 0086 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 734              	.LVL72:
+ 378:Core/Src/ILI9341_STM32_Driver.c **** 		{
+ 735              		.loc 1 378 46 discriminator 3 view .LVU137
+ 378:Core/Src/ILI9341_STM32_Driver.c **** 		{
+ 736              		.loc 1 378 47 is_stmt 0 discriminator 3 view .LVU138
+ 737 008a 0136     		adds	r6, r6, #1
+ 738              	.LVL73:
+ 378:Core/Src/ILI9341_STM32_Driver.c **** 		{
+ 739              		.loc 1 378 47 discriminator 3 view .LVU139
+ 740 008c F5E7     		b	.L45
+ 741              	.L52:
+ 742 008e 00BF     		.align	2
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 21
+
+
+ 743              	.L51:
+ 744 0090 00040240 		.word	1073873920
+ 745 0094 00000240 		.word	1073872896
+ 746 0098 00000000 		.word	hspi1
+ 747              	.LBE3:
+ 748              		.cfi_endproc
+ 749              	.LFE143:
+ 751              		.section	.text.ILI9341_Fill_Screen,"ax",%progbits
+ 752              		.align	1
+ 753              		.global	ILI9341_Fill_Screen
+ 754              		.syntax unified
+ 755              		.thumb
+ 756              		.thumb_func
+ 758              	ILI9341_Fill_Screen:
+ 759              	.LVL74:
+ 760              	.LFB144:
+ 389:Core/Src/ILI9341_STM32_Driver.c **** 
+ 390:Core/Src/ILI9341_STM32_Driver.c **** //FILL THE ENTIRE SCREEN WITH SELECTED COLOUR (either #define-d ones or custom 16bit)
+ 391:Core/Src/ILI9341_STM32_Driver.c **** /*Sets address (entire screen) and Sends Height*Width ammount of colour information to LCD*/
+ 392:Core/Src/ILI9341_STM32_Driver.c **** void ILI9341_Fill_Screen(uint16_t Colour)
+ 393:Core/Src/ILI9341_STM32_Driver.c **** {
+ 761              		.loc 1 393 1 is_stmt 1 view -0
+ 762              		.cfi_startproc
+ 763              		@ args = 0, pretend = 0, frame = 0
+ 764              		@ frame_needed = 0, uses_anonymous_args = 0
+ 765              		.loc 1 393 1 is_stmt 0 view .LVU141
+ 766 0000 70B5     		push	{r4, r5, r6, lr}
+ 767              	.LCFI17:
+ 768              		.cfi_def_cfa_offset 16
+ 769              		.cfi_offset 4, -16
+ 770              		.cfi_offset 5, -12
+ 771              		.cfi_offset 6, -8
+ 772              		.cfi_offset 14, -4
+ 773 0002 0446     		mov	r4, r0
+ 394:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Set_Address(0,0,LCD_WIDTH,LCD_HEIGHT);	
+ 774              		.loc 1 394 1 is_stmt 1 view .LVU142
+ 775 0004 094E     		ldr	r6, .L55
+ 776 0006 3288     		ldrh	r2, [r6]
+ 777 0008 094D     		ldr	r5, .L55+4
+ 778 000a 2B88     		ldrh	r3, [r5]
+ 779 000c 9BB2     		uxth	r3, r3
+ 780 000e 92B2     		uxth	r2, r2
+ 781 0010 0021     		movs	r1, #0
+ 782 0012 0846     		mov	r0, r1
+ 783              	.LVL75:
+ 784              		.loc 1 394 1 is_stmt 0 view .LVU143
+ 785 0014 FFF7FEFF 		bl	ILI9341_Set_Address
+ 786              	.LVL76:
+ 395:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Draw_Colour_Burst(Colour, LCD_WIDTH*LCD_HEIGHT);	
+ 787              		.loc 1 395 1 is_stmt 1 view .LVU144
+ 788              		.loc 1 395 44 is_stmt 0 view .LVU145
+ 789 0018 3388     		ldrh	r3, [r6]
+ 790 001a 9BB2     		uxth	r3, r3
+ 791 001c 2988     		ldrh	r1, [r5]
+ 792 001e 89B2     		uxth	r1, r1
+ 793              		.loc 1 395 1 view .LVU146
+ 794 0020 03FB01F1 		mul	r1, r3, r1
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 22
+
+
+ 795 0024 2046     		mov	r0, r4
+ 796 0026 FFF7FEFF 		bl	ILI9341_Draw_Colour_Burst
+ 797              	.LVL77:
+ 396:Core/Src/ILI9341_STM32_Driver.c **** }
+ 798              		.loc 1 396 1 view .LVU147
+ 799 002a 70BD     		pop	{r4, r5, r6, pc}
+ 800              	.L56:
+ 801              		.align	2
+ 802              	.L55:
+ 803 002c 00000000 		.word	.LANCHOR0
+ 804 0030 00000000 		.word	.LANCHOR1
+ 805              		.cfi_endproc
+ 806              	.LFE144:
+ 808              		.section	.text.ILI9341_Draw_Pixel,"ax",%progbits
+ 809              		.align	1
+ 810              		.global	ILI9341_Draw_Pixel
+ 811              		.syntax unified
+ 812              		.thumb
+ 813              		.thumb_func
+ 815              	ILI9341_Draw_Pixel:
+ 816              	.LVL78:
+ 817              	.LFB145:
+ 397:Core/Src/ILI9341_STM32_Driver.c **** 
+ 398:Core/Src/ILI9341_STM32_Driver.c **** //DRAW PIXEL AT XY POSITION WITH SELECTED COLOUR
+ 399:Core/Src/ILI9341_STM32_Driver.c **** //
+ 400:Core/Src/ILI9341_STM32_Driver.c **** //Location is dependant on screen orientation. x0 and y0 locations change with orientations.
+ 401:Core/Src/ILI9341_STM32_Driver.c **** //Using pixels to draw big simple structures is not recommended as it is really slow
+ 402:Core/Src/ILI9341_STM32_Driver.c **** //Try using either rectangles or lines if possible
+ 403:Core/Src/ILI9341_STM32_Driver.c **** //
+ 404:Core/Src/ILI9341_STM32_Driver.c **** void ILI9341_Draw_Pixel(uint16_t X,uint16_t Y,uint16_t Colour) 
+ 405:Core/Src/ILI9341_STM32_Driver.c **** {
+ 818              		.loc 1 405 1 is_stmt 1 view -0
+ 819              		.cfi_startproc
+ 820              		@ args = 0, pretend = 0, frame = 16
+ 821              		@ frame_needed = 0, uses_anonymous_args = 0
+ 406:Core/Src/ILI9341_STM32_Driver.c **** if((X >=LCD_WIDTH) || (Y >=LCD_HEIGHT)) return;	//OUT OF BOUNDS!
+ 822              		.loc 1 406 1 view .LVU149
+ 823              		.loc 1 406 7 is_stmt 0 view .LVU150
+ 824 0000 5C4B     		ldr	r3, .L66
+ 825 0002 1B88     		ldrh	r3, [r3]
+ 826 0004 9BB2     		uxth	r3, r3
+ 827              		.loc 1 406 3 view .LVU151
+ 828 0006 8342     		cmp	r3, r0
+ 829 0008 40F2B380 		bls	.L62
+ 405:Core/Src/ILI9341_STM32_Driver.c **** if((X >=LCD_WIDTH) || (Y >=LCD_HEIGHT)) return;	//OUT OF BOUNDS!
+ 830              		.loc 1 405 1 discriminator 2 view .LVU152
+ 831 000c 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 832              	.LCFI18:
+ 833              		.cfi_def_cfa_offset 24
+ 834              		.cfi_offset 4, -24
+ 835              		.cfi_offset 5, -20
+ 836              		.cfi_offset 6, -16
+ 837              		.cfi_offset 7, -12
+ 838              		.cfi_offset 8, -8
+ 839              		.cfi_offset 14, -4
+ 840 0010 84B0     		sub	sp, sp, #16
+ 841              	.LCFI19:
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 23
+
+
+ 842              		.cfi_def_cfa_offset 40
+ 843 0012 0446     		mov	r4, r0
+ 844 0014 0D46     		mov	r5, r1
+ 845 0016 1746     		mov	r7, r2
+ 846              		.loc 1 406 26 discriminator 2 view .LVU153
+ 847 0018 574B     		ldr	r3, .L66+4
+ 848 001a 1B88     		ldrh	r3, [r3]
+ 849 001c 9BB2     		uxth	r3, r3
+ 850              		.loc 1 406 20 discriminator 2 view .LVU154
+ 851 001e 8B42     		cmp	r3, r1
+ 852 0020 02D8     		bhi	.L65
+ 853              	.LVL79:
+ 854              	.L57:
+ 407:Core/Src/ILI9341_STM32_Driver.c **** 	
+ 408:Core/Src/ILI9341_STM32_Driver.c **** //ADDRESS
+ 409:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_DC_PORT, LCD_DC_PIN, GPIO_PIN_RESET);	
+ 410:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);
+ 411:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_SPI_Send(0x2A);
+ 412:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_DC_PORT, LCD_DC_PIN, GPIO_PIN_SET);	
+ 413:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_SET);		
+ 414:Core/Src/ILI9341_STM32_Driver.c **** 
+ 415:Core/Src/ILI9341_STM32_Driver.c **** //XDATA
+ 416:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);	
+ 417:Core/Src/ILI9341_STM32_Driver.c **** unsigned char Temp_Buffer[4] = {X>>8,X, (X+1)>>8, (X+1)};
+ 418:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer, 4, 1);
+ 419:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_SET);
+ 420:Core/Src/ILI9341_STM32_Driver.c **** 
+ 421:Core/Src/ILI9341_STM32_Driver.c **** //ADDRESS
+ 422:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_DC_PORT, LCD_DC_PIN, GPIO_PIN_RESET);	
+ 423:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);	
+ 424:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_SPI_Send(0x2B);
+ 425:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_DC_PORT, LCD_DC_PIN, GPIO_PIN_SET);			
+ 426:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_SET);			
+ 427:Core/Src/ILI9341_STM32_Driver.c **** 
+ 428:Core/Src/ILI9341_STM32_Driver.c **** //YDATA
+ 429:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);
+ 430:Core/Src/ILI9341_STM32_Driver.c **** unsigned char Temp_Buffer1[4] = {Y>>8,Y, (Y+1)>>8, (Y+1)};
+ 431:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer1, 4, 1);
+ 432:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_SET);
+ 433:Core/Src/ILI9341_STM32_Driver.c **** 
+ 434:Core/Src/ILI9341_STM32_Driver.c **** //ADDRESS	
+ 435:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_DC_PORT, LCD_DC_PIN, GPIO_PIN_RESET);	
+ 436:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);	
+ 437:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_SPI_Send(0x2C);
+ 438:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_DC_PORT, LCD_DC_PIN, GPIO_PIN_SET);			
+ 439:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_SET);			
+ 440:Core/Src/ILI9341_STM32_Driver.c **** 
+ 441:Core/Src/ILI9341_STM32_Driver.c **** //COLOUR	
+ 442:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);
+ 443:Core/Src/ILI9341_STM32_Driver.c **** unsigned char Temp_Buffer2[2] = {Colour>>8, Colour};
+ 444:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer2, 2, 1);
+ 445:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_SET);
+ 446:Core/Src/ILI9341_STM32_Driver.c **** 	
+ 447:Core/Src/ILI9341_STM32_Driver.c **** }
+ 855              		.loc 1 447 1 view .LVU155
+ 856 0022 04B0     		add	sp, sp, #16
+ 857              	.LCFI20:
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 24
+
+
+ 858              		.cfi_remember_state
+ 859              		.cfi_def_cfa_offset 24
+ 860              		@ sp needed
+ 861 0024 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 862              	.LVL80:
+ 863              	.L65:
+ 864              	.LCFI21:
+ 865              		.cfi_restore_state
+ 409:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);
+ 866              		.loc 1 409 1 is_stmt 1 view .LVU156
+ 867 0028 DFF85881 		ldr	r8, .L66+16
+ 868 002c 0022     		movs	r2, #0
+ 869              	.LVL81:
+ 409:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);
+ 870              		.loc 1 409 1 is_stmt 0 view .LVU157
+ 871 002e 4021     		movs	r1, #64
+ 872              	.LVL82:
+ 409:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);
+ 873              		.loc 1 409 1 view .LVU158
+ 874 0030 4046     		mov	r0, r8
+ 875              	.LVL83:
+ 409:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);
+ 876              		.loc 1 409 1 view .LVU159
+ 877 0032 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 878              	.LVL84:
+ 410:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_SPI_Send(0x2A);
+ 879              		.loc 1 410 1 is_stmt 1 view .LVU160
+ 880 0036 514E     		ldr	r6, .L66+8
+ 881 0038 0022     		movs	r2, #0
+ 882 003a 4FF40071 		mov	r1, #512
+ 883 003e 3046     		mov	r0, r6
+ 884 0040 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 885              	.LVL85:
+ 411:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_DC_PORT, LCD_DC_PIN, GPIO_PIN_SET);	
+ 886              		.loc 1 411 1 view .LVU161
+ 887 0044 2A20     		movs	r0, #42
+ 888 0046 FFF7FEFF 		bl	ILI9341_SPI_Send
+ 889              	.LVL86:
+ 412:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_SET);		
+ 890              		.loc 1 412 1 view .LVU162
+ 891 004a 0122     		movs	r2, #1
+ 892 004c 4021     		movs	r1, #64
+ 893 004e 4046     		mov	r0, r8
+ 894 0050 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 895              	.LVL87:
+ 413:Core/Src/ILI9341_STM32_Driver.c **** 
+ 896              		.loc 1 413 1 view .LVU163
+ 897 0054 0122     		movs	r2, #1
+ 898 0056 4FF40071 		mov	r1, #512
+ 899 005a 3046     		mov	r0, r6
+ 900 005c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 901              	.LVL88:
+ 416:Core/Src/ILI9341_STM32_Driver.c **** unsigned char Temp_Buffer[4] = {X>>8,X, (X+1)>>8, (X+1)};
+ 902              		.loc 1 416 1 view .LVU164
+ 903 0060 0022     		movs	r2, #0
+ 904 0062 4FF40071 		mov	r1, #512
+ 905 0066 3046     		mov	r0, r6
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 25
+
+
+ 906 0068 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 907              	.LVL89:
+ 417:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer, 4, 1);
+ 908              		.loc 1 417 1 view .LVU165
+ 417:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer, 4, 1);
+ 909              		.loc 1 417 15 is_stmt 0 view .LVU166
+ 910 006c 230A     		lsrs	r3, r4, #8
+ 911 006e 8DF80C30 		strb	r3, [sp, #12]
+ 912 0072 E3B2     		uxtb	r3, r4
+ 913 0074 8DF80D30 		strb	r3, [sp, #13]
+ 417:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer, 4, 1);
+ 914              		.loc 1 417 43 view .LVU167
+ 915 0078 0134     		adds	r4, r4, #1
+ 417:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer, 4, 1);
+ 916              		.loc 1 417 46 view .LVU168
+ 917 007a 2412     		asrs	r4, r4, #8
+ 417:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer, 4, 1);
+ 918              		.loc 1 417 15 view .LVU169
+ 919 007c 8DF80E40 		strb	r4, [sp, #14]
+ 417:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer, 4, 1);
+ 920              		.loc 1 417 53 view .LVU170
+ 921 0080 0133     		adds	r3, r3, #1
+ 417:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer, 4, 1);
+ 922              		.loc 1 417 15 view .LVU171
+ 923 0082 8DF80F30 		strb	r3, [sp, #15]
+ 418:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_SET);
+ 924              		.loc 1 418 1 is_stmt 1 view .LVU172
+ 925 0086 3E4C     		ldr	r4, .L66+12
+ 926 0088 0123     		movs	r3, #1
+ 927 008a 0422     		movs	r2, #4
+ 928 008c 03A9     		add	r1, sp, #12
+ 929 008e 2046     		mov	r0, r4
+ 930 0090 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 931              	.LVL90:
+ 419:Core/Src/ILI9341_STM32_Driver.c **** 
+ 932              		.loc 1 419 1 view .LVU173
+ 933 0094 0122     		movs	r2, #1
+ 934 0096 4FF40071 		mov	r1, #512
+ 935 009a 3046     		mov	r0, r6
+ 936 009c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 937              	.LVL91:
+ 422:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);	
+ 938              		.loc 1 422 1 view .LVU174
+ 939 00a0 0022     		movs	r2, #0
+ 940 00a2 4021     		movs	r1, #64
+ 941 00a4 4046     		mov	r0, r8
+ 942 00a6 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 943              	.LVL92:
+ 423:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_SPI_Send(0x2B);
+ 944              		.loc 1 423 1 view .LVU175
+ 945 00aa 0022     		movs	r2, #0
+ 946 00ac 4FF40071 		mov	r1, #512
+ 947 00b0 3046     		mov	r0, r6
+ 948 00b2 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 949              	.LVL93:
+ 424:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_DC_PORT, LCD_DC_PIN, GPIO_PIN_SET);			
+ 950              		.loc 1 424 1 view .LVU176
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 26
+
+
+ 951 00b6 2B20     		movs	r0, #43
+ 952 00b8 FFF7FEFF 		bl	ILI9341_SPI_Send
+ 953              	.LVL94:
+ 425:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_SET);			
+ 954              		.loc 1 425 1 view .LVU177
+ 955 00bc 0122     		movs	r2, #1
+ 956 00be 4021     		movs	r1, #64
+ 957 00c0 4046     		mov	r0, r8
+ 958 00c2 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 959              	.LVL95:
+ 426:Core/Src/ILI9341_STM32_Driver.c **** 
+ 960              		.loc 1 426 1 view .LVU178
+ 961 00c6 0122     		movs	r2, #1
+ 962 00c8 4FF40071 		mov	r1, #512
+ 963 00cc 3046     		mov	r0, r6
+ 964 00ce FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 965              	.LVL96:
+ 429:Core/Src/ILI9341_STM32_Driver.c **** unsigned char Temp_Buffer1[4] = {Y>>8,Y, (Y+1)>>8, (Y+1)};
+ 966              		.loc 1 429 1 view .LVU179
+ 967 00d2 0022     		movs	r2, #0
+ 968 00d4 4FF40071 		mov	r1, #512
+ 969 00d8 3046     		mov	r0, r6
+ 970 00da FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 971              	.LVL97:
+ 430:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer1, 4, 1);
+ 972              		.loc 1 430 1 view .LVU180
+ 430:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer1, 4, 1);
+ 973              		.loc 1 430 15 is_stmt 0 view .LVU181
+ 974 00de 2B0A     		lsrs	r3, r5, #8
+ 975 00e0 8DF80830 		strb	r3, [sp, #8]
+ 976 00e4 EBB2     		uxtb	r3, r5
+ 977 00e6 8DF80930 		strb	r3, [sp, #9]
+ 430:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer1, 4, 1);
+ 978              		.loc 1 430 44 view .LVU182
+ 979 00ea 0135     		adds	r5, r5, #1
+ 430:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer1, 4, 1);
+ 980              		.loc 1 430 47 view .LVU183
+ 981 00ec 2D12     		asrs	r5, r5, #8
+ 430:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer1, 4, 1);
+ 982              		.loc 1 430 15 view .LVU184
+ 983 00ee 8DF80A50 		strb	r5, [sp, #10]
+ 430:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer1, 4, 1);
+ 984              		.loc 1 430 54 view .LVU185
+ 985 00f2 0133     		adds	r3, r3, #1
+ 430:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer1, 4, 1);
+ 986              		.loc 1 430 15 view .LVU186
+ 987 00f4 8DF80B30 		strb	r3, [sp, #11]
+ 431:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_SET);
+ 988              		.loc 1 431 1 is_stmt 1 view .LVU187
+ 989 00f8 0123     		movs	r3, #1
+ 990 00fa 0422     		movs	r2, #4
+ 991 00fc 02A9     		add	r1, sp, #8
+ 992 00fe 2046     		mov	r0, r4
+ 993 0100 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 994              	.LVL98:
+ 432:Core/Src/ILI9341_STM32_Driver.c **** 
+ 995              		.loc 1 432 1 view .LVU188
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 27
+
+
+ 996 0104 0122     		movs	r2, #1
+ 997 0106 4FF40071 		mov	r1, #512
+ 998 010a 3046     		mov	r0, r6
+ 999 010c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1000              	.LVL99:
+ 435:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_RESET);	
+ 1001              		.loc 1 435 1 view .LVU189
+ 1002 0110 0022     		movs	r2, #0
+ 1003 0112 4021     		movs	r1, #64
+ 1004 0114 4046     		mov	r0, r8
+ 1005 0116 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1006              	.LVL100:
+ 436:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_SPI_Send(0x2C);
+ 1007              		.loc 1 436 1 view .LVU190
+ 1008 011a 0022     		movs	r2, #0
+ 1009 011c 4FF40071 		mov	r1, #512
+ 1010 0120 3046     		mov	r0, r6
+ 1011 0122 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1012              	.LVL101:
+ 437:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_DC_PORT, LCD_DC_PIN, GPIO_PIN_SET);			
+ 1013              		.loc 1 437 1 view .LVU191
+ 1014 0126 2C20     		movs	r0, #44
+ 1015 0128 FFF7FEFF 		bl	ILI9341_SPI_Send
+ 1016              	.LVL102:
+ 438:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_SET);			
+ 1017              		.loc 1 438 1 view .LVU192
+ 1018 012c 0122     		movs	r2, #1
+ 1019 012e 4021     		movs	r1, #64
+ 1020 0130 4046     		mov	r0, r8
+ 1021 0132 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1022              	.LVL103:
+ 439:Core/Src/ILI9341_STM32_Driver.c **** 
+ 1023              		.loc 1 439 1 view .LVU193
+ 1024 0136 0122     		movs	r2, #1
+ 1025 0138 4FF40071 		mov	r1, #512
+ 1026 013c 3046     		mov	r0, r6
+ 1027 013e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1028              	.LVL104:
+ 442:Core/Src/ILI9341_STM32_Driver.c **** unsigned char Temp_Buffer2[2] = {Colour>>8, Colour};
+ 1029              		.loc 1 442 1 view .LVU194
+ 1030 0142 0022     		movs	r2, #0
+ 1031 0144 4FF40071 		mov	r1, #512
+ 1032 0148 3046     		mov	r0, r6
+ 1033 014a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1034              	.LVL105:
+ 443:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer2, 2, 1);
+ 1035              		.loc 1 443 1 view .LVU195
+ 443:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, Temp_Buffer2, 2, 1);
+ 1036              		.loc 1 443 15 is_stmt 0 view .LVU196
+ 1037 014e 3B0A     		lsrs	r3, r7, #8
+ 1038 0150 8DF80430 		strb	r3, [sp, #4]
+ 1039 0154 8DF80570 		strb	r7, [sp, #5]
+ 444:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_CS_PORT, LCD_CS_PIN, GPIO_PIN_SET);
+ 1040              		.loc 1 444 1 is_stmt 1 view .LVU197
+ 1041 0158 0123     		movs	r3, #1
+ 1042 015a 0222     		movs	r2, #2
+ 1043 015c 01A9     		add	r1, sp, #4
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 28
+
+
+ 1044 015e 2046     		mov	r0, r4
+ 1045 0160 FFF7FEFF 		bl	HAL_SPI_Transmit
+ 1046              	.LVL106:
+ 445:Core/Src/ILI9341_STM32_Driver.c **** 	
+ 1047              		.loc 1 445 1 view .LVU198
+ 1048 0164 0122     		movs	r2, #1
+ 1049 0166 4FF40071 		mov	r1, #512
+ 1050 016a 3046     		mov	r0, r6
+ 1051 016c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 1052              	.LVL107:
+ 1053 0170 57E7     		b	.L57
+ 1054              	.LVL108:
+ 1055              	.L62:
+ 1056              	.LCFI22:
+ 1057              		.cfi_def_cfa_offset 0
+ 1058              		.cfi_restore 4
+ 1059              		.cfi_restore 5
+ 1060              		.cfi_restore 6
+ 1061              		.cfi_restore 7
+ 1062              		.cfi_restore 8
+ 1063              		.cfi_restore 14
+ 445:Core/Src/ILI9341_STM32_Driver.c **** 	
+ 1064              		.loc 1 445 1 is_stmt 0 view .LVU199
+ 1065 0172 7047     		bx	lr
+ 1066              	.L67:
+ 1067              		.align	2
+ 1068              	.L66:
+ 1069 0174 00000000 		.word	.LANCHOR0
+ 1070 0178 00000000 		.word	.LANCHOR1
+ 1071 017c 00000240 		.word	1073872896
+ 1072 0180 00000000 		.word	hspi1
+ 1073 0184 00040240 		.word	1073873920
+ 1074              		.cfi_endproc
+ 1075              	.LFE145:
+ 1077              		.section	.text.ILI9341_Draw_Rectangle,"ax",%progbits
+ 1078              		.align	1
+ 1079              		.global	ILI9341_Draw_Rectangle
+ 1080              		.syntax unified
+ 1081              		.thumb
+ 1082              		.thumb_func
+ 1084              	ILI9341_Draw_Rectangle:
+ 1085              	.LVL109:
+ 1086              	.LFB146:
+ 448:Core/Src/ILI9341_STM32_Driver.c **** 
+ 449:Core/Src/ILI9341_STM32_Driver.c **** //DRAW RECTANGLE OF SET SIZE AND HEIGTH AT X and Y POSITION WITH CUSTOM COLOUR
+ 450:Core/Src/ILI9341_STM32_Driver.c **** //
+ 451:Core/Src/ILI9341_STM32_Driver.c **** //Rectangle is hollow. X and Y positions mark the upper left corner of rectangle
+ 452:Core/Src/ILI9341_STM32_Driver.c **** //As with all other draw calls x0 and y0 locations dependant on screen orientation
+ 453:Core/Src/ILI9341_STM32_Driver.c **** //
+ 454:Core/Src/ILI9341_STM32_Driver.c **** 
+ 455:Core/Src/ILI9341_STM32_Driver.c **** void ILI9341_Draw_Rectangle(uint16_t X, uint16_t Y, uint16_t Width, uint16_t Height, uint16_t Colou
+ 456:Core/Src/ILI9341_STM32_Driver.c **** {
+ 1087              		.loc 1 456 1 is_stmt 1 view -0
+ 1088              		.cfi_startproc
+ 1089              		@ args = 4, pretend = 0, frame = 0
+ 1090              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1091              		.loc 1 456 1 is_stmt 0 view .LVU201
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 29
+
+
+ 1092 0000 38B5     		push	{r3, r4, r5, lr}
+ 1093              	.LCFI23:
+ 1094              		.cfi_def_cfa_offset 16
+ 1095              		.cfi_offset 3, -16
+ 1096              		.cfi_offset 4, -12
+ 1097              		.cfi_offset 5, -8
+ 1098              		.cfi_offset 14, -4
+ 1099 0002 1C46     		mov	r4, r3
+ 457:Core/Src/ILI9341_STM32_Driver.c **** if((X >=LCD_WIDTH) || (Y >=LCD_HEIGHT)) return;
+ 1100              		.loc 1 457 1 is_stmt 1 view .LVU202
+ 1101              		.loc 1 457 7 is_stmt 0 view .LVU203
+ 1102 0004 184B     		ldr	r3, .L73
+ 1103              	.LVL110:
+ 1104              		.loc 1 457 7 view .LVU204
+ 1105 0006 1B88     		ldrh	r3, [r3]
+ 1106 0008 9BB2     		uxth	r3, r3
+ 1107              		.loc 1 457 3 view .LVU205
+ 1108 000a 8342     		cmp	r3, r0
+ 1109 000c 2BD9     		bls	.L68
+ 1110 000e 1546     		mov	r5, r2
+ 1111              		.loc 1 457 26 discriminator 2 view .LVU206
+ 1112 0010 164B     		ldr	r3, .L73+4
+ 1113 0012 1B88     		ldrh	r3, [r3]
+ 1114 0014 9BB2     		uxth	r3, r3
+ 1115              		.loc 1 457 20 discriminator 2 view .LVU207
+ 1116 0016 8B42     		cmp	r3, r1
+ 1117 0018 25D9     		bls	.L68
+ 458:Core/Src/ILI9341_STM32_Driver.c **** if((X+Width-1)>=LCD_WIDTH)
+ 1118              		.loc 1 458 1 is_stmt 1 view .LVU208
+ 1119              		.loc 1 458 6 is_stmt 0 view .LVU209
+ 1120 001a 8218     		adds	r2, r0, r2
+ 1121              	.LVL111:
+ 1122              		.loc 1 458 15 view .LVU210
+ 1123 001c 124B     		ldr	r3, .L73
+ 1124 001e 1B88     		ldrh	r3, [r3]
+ 1125 0020 9BB2     		uxth	r3, r3
+ 1126              		.loc 1 458 3 view .LVU211
+ 1127 0022 9A42     		cmp	r2, r3
+ 1128 0024 04DD     		ble	.L70
+ 459:Core/Src/ILI9341_STM32_Driver.c **** 	{
+ 460:Core/Src/ILI9341_STM32_Driver.c **** 		Width=LCD_WIDTH-X;
+ 1129              		.loc 1 460 3 is_stmt 1 view .LVU212
+ 1130              		.loc 1 460 18 is_stmt 0 view .LVU213
+ 1131 0026 104B     		ldr	r3, .L73
+ 1132 0028 1D88     		ldrh	r5, [r3]
+ 1133 002a ADB2     		uxth	r5, r5
+ 1134              		.loc 1 460 8 view .LVU214
+ 1135 002c 2D1A     		subs	r5, r5, r0
+ 1136 002e ADB2     		uxth	r5, r5
+ 1137              	.LVL112:
+ 1138              	.L70:
+ 461:Core/Src/ILI9341_STM32_Driver.c **** 	}
+ 462:Core/Src/ILI9341_STM32_Driver.c **** if((Y+Height-1)>=LCD_HEIGHT)
+ 1139              		.loc 1 462 1 is_stmt 1 view .LVU215
+ 1140              		.loc 1 462 6 is_stmt 0 view .LVU216
+ 1141 0030 0A19     		adds	r2, r1, r4
+ 1142              		.loc 1 462 16 view .LVU217
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 30
+
+
+ 1143 0032 0E4B     		ldr	r3, .L73+4
+ 1144 0034 1B88     		ldrh	r3, [r3]
+ 1145 0036 9BB2     		uxth	r3, r3
+ 1146              		.loc 1 462 3 view .LVU218
+ 1147 0038 9A42     		cmp	r2, r3
+ 1148 003a 04DD     		ble	.L71
+ 463:Core/Src/ILI9341_STM32_Driver.c **** 	{
+ 464:Core/Src/ILI9341_STM32_Driver.c **** 		Height=LCD_HEIGHT-Y;
+ 1149              		.loc 1 464 3 is_stmt 1 view .LVU219
+ 1150              		.loc 1 464 20 is_stmt 0 view .LVU220
+ 1151 003c 0B4B     		ldr	r3, .L73+4
+ 1152 003e 1C88     		ldrh	r4, [r3]
+ 1153 0040 A4B2     		uxth	r4, r4
+ 1154              		.loc 1 464 9 view .LVU221
+ 1155 0042 641A     		subs	r4, r4, r1
+ 1156 0044 A4B2     		uxth	r4, r4
+ 1157              	.LVL113:
+ 1158              	.L71:
+ 465:Core/Src/ILI9341_STM32_Driver.c **** 	}
+ 466:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Set_Address(X, Y, X+Width-1, Y+Height-1);
+ 1159              		.loc 1 466 1 is_stmt 1 view .LVU222
+ 1160              		.loc 1 466 28 is_stmt 0 view .LVU223
+ 1161 0046 2A18     		adds	r2, r5, r0
+ 1162 0048 92B2     		uxth	r2, r2
+ 1163              		.loc 1 466 39 view .LVU224
+ 1164 004a 6318     		adds	r3, r4, r1
+ 1165 004c 9BB2     		uxth	r3, r3
+ 1166              		.loc 1 466 1 view .LVU225
+ 1167 004e 013B     		subs	r3, r3, #1
+ 1168 0050 013A     		subs	r2, r2, #1
+ 1169 0052 9BB2     		uxth	r3, r3
+ 1170 0054 92B2     		uxth	r2, r2
+ 1171 0056 FFF7FEFF 		bl	ILI9341_Set_Address
+ 1172              	.LVL114:
+ 467:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Draw_Colour_Burst(Colour, Height*Width);
+ 1173              		.loc 1 467 1 is_stmt 1 view .LVU226
+ 1174 005a 05FB04F1 		mul	r1, r5, r4
+ 1175 005e BDF81000 		ldrh	r0, [sp, #16]
+ 1176 0062 FFF7FEFF 		bl	ILI9341_Draw_Colour_Burst
+ 1177              	.LVL115:
+ 1178              	.L68:
+ 468:Core/Src/ILI9341_STM32_Driver.c **** }
+ 1179              		.loc 1 468 1 is_stmt 0 view .LVU227
+ 1180 0066 38BD     		pop	{r3, r4, r5, pc}
+ 1181              	.LVL116:
+ 1182              	.L74:
+ 1183              		.loc 1 468 1 view .LVU228
+ 1184              		.align	2
+ 1185              	.L73:
+ 1186 0068 00000000 		.word	.LANCHOR0
+ 1187 006c 00000000 		.word	.LANCHOR1
+ 1188              		.cfi_endproc
+ 1189              	.LFE146:
+ 1191              		.section	.text.ILI9341_Draw_Horizontal_Line,"ax",%progbits
+ 1192              		.align	1
+ 1193              		.global	ILI9341_Draw_Horizontal_Line
+ 1194              		.syntax unified
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 31
+
+
+ 1195              		.thumb
+ 1196              		.thumb_func
+ 1198              	ILI9341_Draw_Horizontal_Line:
+ 1199              	.LVL117:
+ 1200              	.LFB147:
+ 469:Core/Src/ILI9341_STM32_Driver.c **** 
+ 470:Core/Src/ILI9341_STM32_Driver.c **** //DRAW LINE FROM X,Y LOCATION to X+Width,Y LOCATION
+ 471:Core/Src/ILI9341_STM32_Driver.c **** void ILI9341_Draw_Horizontal_Line(uint16_t X, uint16_t Y, uint16_t Width, uint16_t Colour)
+ 472:Core/Src/ILI9341_STM32_Driver.c **** {
+ 1201              		.loc 1 472 1 is_stmt 1 view -0
+ 1202              		.cfi_startproc
+ 1203              		@ args = 0, pretend = 0, frame = 0
+ 1204              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1205              		.loc 1 472 1 is_stmt 0 view .LVU230
+ 1206 0000 38B5     		push	{r3, r4, r5, lr}
+ 1207              	.LCFI24:
+ 1208              		.cfi_def_cfa_offset 16
+ 1209              		.cfi_offset 3, -16
+ 1210              		.cfi_offset 4, -12
+ 1211              		.cfi_offset 5, -8
+ 1212              		.cfi_offset 14, -4
+ 1213 0002 1446     		mov	r4, r2
+ 1214 0004 1D46     		mov	r5, r3
+ 473:Core/Src/ILI9341_STM32_Driver.c **** if((X >=LCD_WIDTH) || (Y >=LCD_HEIGHT)) return;
+ 1215              		.loc 1 473 1 is_stmt 1 view .LVU231
+ 1216              		.loc 1 473 7 is_stmt 0 view .LVU232
+ 1217 0006 104B     		ldr	r3, .L79
+ 1218              	.LVL118:
+ 1219              		.loc 1 473 7 view .LVU233
+ 1220 0008 1A88     		ldrh	r2, [r3]
+ 1221              	.LVL119:
+ 1222              		.loc 1 473 7 view .LVU234
+ 1223 000a 92B2     		uxth	r2, r2
+ 1224              		.loc 1 473 3 view .LVU235
+ 1225 000c 8242     		cmp	r2, r0
+ 1226 000e 1AD9     		bls	.L75
+ 1227              		.loc 1 473 26 discriminator 2 view .LVU236
+ 1228 0010 0E4B     		ldr	r3, .L79+4
+ 1229 0012 1B88     		ldrh	r3, [r3]
+ 1230 0014 9BB2     		uxth	r3, r3
+ 1231              		.loc 1 473 20 discriminator 2 view .LVU237
+ 1232 0016 8B42     		cmp	r3, r1
+ 1233 0018 15D9     		bls	.L75
+ 474:Core/Src/ILI9341_STM32_Driver.c **** if((X+Width-1)>=LCD_WIDTH)
+ 1234              		.loc 1 474 1 is_stmt 1 view .LVU238
+ 1235              		.loc 1 474 6 is_stmt 0 view .LVU239
+ 1236 001a 0219     		adds	r2, r0, r4
+ 1237              		.loc 1 474 15 view .LVU240
+ 1238 001c 0A4B     		ldr	r3, .L79
+ 1239 001e 1B88     		ldrh	r3, [r3]
+ 1240 0020 9BB2     		uxth	r3, r3
+ 1241              		.loc 1 474 3 view .LVU241
+ 1242 0022 9A42     		cmp	r2, r3
+ 1243 0024 04DD     		ble	.L77
+ 475:Core/Src/ILI9341_STM32_Driver.c **** 	{
+ 476:Core/Src/ILI9341_STM32_Driver.c **** 		Width=LCD_WIDTH-X;
+ 1244              		.loc 1 476 3 is_stmt 1 view .LVU242
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 32
+
+
+ 1245              		.loc 1 476 18 is_stmt 0 view .LVU243
+ 1246 0026 084B     		ldr	r3, .L79
+ 1247 0028 1C88     		ldrh	r4, [r3]
+ 1248 002a A4B2     		uxth	r4, r4
+ 1249              		.loc 1 476 8 view .LVU244
+ 1250 002c 241A     		subs	r4, r4, r0
+ 1251 002e A4B2     		uxth	r4, r4
+ 1252              	.LVL120:
+ 1253              	.L77:
+ 477:Core/Src/ILI9341_STM32_Driver.c **** 	}
+ 478:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Set_Address(X, Y, X+Width-1, Y);
+ 1254              		.loc 1 478 1 is_stmt 1 view .LVU245
+ 1255              		.loc 1 478 28 is_stmt 0 view .LVU246
+ 1256 0030 2218     		adds	r2, r4, r0
+ 1257 0032 92B2     		uxth	r2, r2
+ 1258              		.loc 1 478 1 view .LVU247
+ 1259 0034 013A     		subs	r2, r2, #1
+ 1260 0036 0B46     		mov	r3, r1
+ 1261 0038 92B2     		uxth	r2, r2
+ 1262 003a FFF7FEFF 		bl	ILI9341_Set_Address
+ 1263              	.LVL121:
+ 479:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Draw_Colour_Burst(Colour, Width);
+ 1264              		.loc 1 479 1 is_stmt 1 view .LVU248
+ 1265 003e 2146     		mov	r1, r4
+ 1266 0040 2846     		mov	r0, r5
+ 1267 0042 FFF7FEFF 		bl	ILI9341_Draw_Colour_Burst
+ 1268              	.LVL122:
+ 1269              	.L75:
+ 480:Core/Src/ILI9341_STM32_Driver.c **** }
+ 1270              		.loc 1 480 1 is_stmt 0 view .LVU249
+ 1271 0046 38BD     		pop	{r3, r4, r5, pc}
+ 1272              	.L80:
+ 1273              		.align	2
+ 1274              	.L79:
+ 1275 0048 00000000 		.word	.LANCHOR0
+ 1276 004c 00000000 		.word	.LANCHOR1
+ 1277              		.cfi_endproc
+ 1278              	.LFE147:
+ 1280              		.section	.text.ILI9341_Draw_Vertical_Line,"ax",%progbits
+ 1281              		.align	1
+ 1282              		.global	ILI9341_Draw_Vertical_Line
+ 1283              		.syntax unified
+ 1284              		.thumb
+ 1285              		.thumb_func
+ 1287              	ILI9341_Draw_Vertical_Line:
+ 1288              	.LVL123:
+ 1289              	.LFB148:
+ 481:Core/Src/ILI9341_STM32_Driver.c **** 
+ 482:Core/Src/ILI9341_STM32_Driver.c **** //DRAW LINE FROM X,Y LOCATION to X,Y+Height LOCATION
+ 483:Core/Src/ILI9341_STM32_Driver.c **** void ILI9341_Draw_Vertical_Line(uint16_t X, uint16_t Y, uint16_t Height, uint16_t Colour)
+ 484:Core/Src/ILI9341_STM32_Driver.c **** {
+ 1290              		.loc 1 484 1 is_stmt 1 view -0
+ 1291              		.cfi_startproc
+ 1292              		@ args = 0, pretend = 0, frame = 0
+ 1293              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1294              		.loc 1 484 1 is_stmt 0 view .LVU251
+ 1295 0000 38B5     		push	{r3, r4, r5, lr}
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 33
+
+
+ 1296              	.LCFI25:
+ 1297              		.cfi_def_cfa_offset 16
+ 1298              		.cfi_offset 3, -16
+ 1299              		.cfi_offset 4, -12
+ 1300              		.cfi_offset 5, -8
+ 1301              		.cfi_offset 14, -4
+ 1302 0002 1446     		mov	r4, r2
+ 1303 0004 1D46     		mov	r5, r3
+ 485:Core/Src/ILI9341_STM32_Driver.c **** if((X >=LCD_WIDTH) || (Y >=LCD_HEIGHT)) return;
+ 1304              		.loc 1 485 1 is_stmt 1 view .LVU252
+ 1305              		.loc 1 485 7 is_stmt 0 view .LVU253
+ 1306 0006 104B     		ldr	r3, .L85
+ 1307              	.LVL124:
+ 1308              		.loc 1 485 7 view .LVU254
+ 1309 0008 1A88     		ldrh	r2, [r3]
+ 1310              	.LVL125:
+ 1311              		.loc 1 485 7 view .LVU255
+ 1312 000a 92B2     		uxth	r2, r2
+ 1313              		.loc 1 485 3 view .LVU256
+ 1314 000c 8242     		cmp	r2, r0
+ 1315 000e 1AD9     		bls	.L81
+ 1316              		.loc 1 485 26 discriminator 2 view .LVU257
+ 1317 0010 0E4B     		ldr	r3, .L85+4
+ 1318 0012 1B88     		ldrh	r3, [r3]
+ 1319 0014 9BB2     		uxth	r3, r3
+ 1320              		.loc 1 485 20 discriminator 2 view .LVU258
+ 1321 0016 8B42     		cmp	r3, r1
+ 1322 0018 15D9     		bls	.L81
+ 486:Core/Src/ILI9341_STM32_Driver.c **** if((Y+Height-1)>=LCD_HEIGHT)
+ 1323              		.loc 1 486 1 is_stmt 1 view .LVU259
+ 1324              		.loc 1 486 6 is_stmt 0 view .LVU260
+ 1325 001a 0A19     		adds	r2, r1, r4
+ 1326              		.loc 1 486 16 view .LVU261
+ 1327 001c 0B4B     		ldr	r3, .L85+4
+ 1328 001e 1B88     		ldrh	r3, [r3]
+ 1329 0020 9BB2     		uxth	r3, r3
+ 1330              		.loc 1 486 3 view .LVU262
+ 1331 0022 9A42     		cmp	r2, r3
+ 1332 0024 04DD     		ble	.L83
+ 487:Core/Src/ILI9341_STM32_Driver.c **** 	{
+ 488:Core/Src/ILI9341_STM32_Driver.c **** 		Height=LCD_HEIGHT-Y;
+ 1333              		.loc 1 488 3 is_stmt 1 view .LVU263
+ 1334              		.loc 1 488 20 is_stmt 0 view .LVU264
+ 1335 0026 094B     		ldr	r3, .L85+4
+ 1336 0028 1C88     		ldrh	r4, [r3]
+ 1337 002a A4B2     		uxth	r4, r4
+ 1338              		.loc 1 488 9 view .LVU265
+ 1339 002c 641A     		subs	r4, r4, r1
+ 1340 002e A4B2     		uxth	r4, r4
+ 1341              	.LVL126:
+ 1342              	.L83:
+ 489:Core/Src/ILI9341_STM32_Driver.c **** 	}
+ 490:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Set_Address(X, Y, X, Y+Height-1);
+ 1343              		.loc 1 490 1 is_stmt 1 view .LVU266
+ 1344              		.loc 1 490 31 is_stmt 0 view .LVU267
+ 1345 0030 6318     		adds	r3, r4, r1
+ 1346 0032 9BB2     		uxth	r3, r3
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 34
+
+
+ 1347              		.loc 1 490 1 view .LVU268
+ 1348 0034 013B     		subs	r3, r3, #1
+ 1349 0036 9BB2     		uxth	r3, r3
+ 1350 0038 0246     		mov	r2, r0
+ 1351 003a FFF7FEFF 		bl	ILI9341_Set_Address
+ 1352              	.LVL127:
+ 491:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Draw_Colour_Burst(Colour, Height);
+ 1353              		.loc 1 491 1 is_stmt 1 view .LVU269
+ 1354 003e 2146     		mov	r1, r4
+ 1355 0040 2846     		mov	r0, r5
+ 1356 0042 FFF7FEFF 		bl	ILI9341_Draw_Colour_Burst
+ 1357              	.LVL128:
+ 1358              	.L81:
+ 492:Core/Src/ILI9341_STM32_Driver.c **** }
+ 1359              		.loc 1 492 1 is_stmt 0 view .LVU270
+ 1360 0046 38BD     		pop	{r3, r4, r5, pc}
+ 1361              	.L86:
+ 1362              		.align	2
+ 1363              	.L85:
+ 1364 0048 00000000 		.word	.LANCHOR0
+ 1365 004c 00000000 		.word	.LANCHOR1
+ 1366              		.cfi_endproc
+ 1367              	.LFE148:
+ 1369              		.global	LCD_WIDTH
+ 1370              		.global	LCD_HEIGHT
+ 1371              		.section	.data.LCD_HEIGHT,"aw"
+ 1372              		.align	1
+ 1373              		.set	.LANCHOR1,. + 0
+ 1376              	LCD_HEIGHT:
+ 1377 0000 4001     		.short	320
+ 1378              		.section	.data.LCD_WIDTH,"aw"
+ 1379              		.align	1
+ 1380              		.set	.LANCHOR0,. + 0
+ 1383              	LCD_WIDTH:
+ 1384 0000 F000     		.short	240
+ 1385              		.text
+ 1386              	.Letext0:
+ 1387              		.file 2 "c:\\users\\zacht\\desktop\\files\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\\
+ 1388              		.file 3 "c:\\users\\zacht\\desktop\\files\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\\
+ 1389              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h"
+ 1390              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 1391              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 1392              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 1393              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h"
+ 1394              		.file 9 "Core/Inc/spi.h"
+ 1395              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
+ 1396              		.file 11 "Core/Inc/gpio.h"
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 35
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ILI9341_STM32_Driver.c
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:20     .text.ILI9341_SPI_Init:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:26     .text.ILI9341_SPI_Init:00000000 ILI9341_SPI_Init
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:55     .text.ILI9341_SPI_Init:00000018 $d
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:60     .text.ILI9341_SPI_Send:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:66     .text.ILI9341_SPI_Send:00000000 ILI9341_SPI_Send
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:100    .text.ILI9341_SPI_Send:0000001c $d
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:105    .text.ILI9341_Write_Command:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:111    .text.ILI9341_Write_Command:00000000 ILI9341_Write_Command
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:157    .text.ILI9341_Write_Command:00000030 $d
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:163    .text.ILI9341_Write_Data:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:169    .text.ILI9341_Write_Data:00000000 ILI9341_Write_Data
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:215    .text.ILI9341_Write_Data:00000030 $d
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:221    .text.ILI9341_Set_Address:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:227    .text.ILI9341_Set_Address:00000000 ILI9341_Set_Address
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:300    .text.ILI9341_Reset:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:306    .text.ILI9341_Reset:00000000 ILI9341_Reset
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:349    .text.ILI9341_Reset:00000034 $d
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:355    .text.ILI9341_Set_Rotation:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:361    .text.ILI9341_Set_Rotation:00000000 ILI9341_Set_Rotation
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:392    .text.ILI9341_Set_Rotation:00000018 $d
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:396    .text.ILI9341_Set_Rotation:0000001c $t
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:472    .text.ILI9341_Set_Rotation:00000074 $d
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:478    .text.ILI9341_Enable:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:484    .text.ILI9341_Enable:00000000 ILI9341_Enable
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:506    .text.ILI9341_Enable:00000010 $d
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:511    .text.ILI9341_Draw_Colour:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:517    .text.ILI9341_Draw_Colour:00000000 ILI9341_Draw_Colour
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:575    .text.ILI9341_Draw_Colour:00000044 $d
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:582    .text.ILI9341_Draw_Colour_Burst:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:588    .text.ILI9341_Draw_Colour_Burst:00000000 ILI9341_Draw_Colour_Burst
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:744    .text.ILI9341_Draw_Colour_Burst:00000090 $d
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:752    .text.ILI9341_Fill_Screen:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:758    .text.ILI9341_Fill_Screen:00000000 ILI9341_Fill_Screen
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:803    .text.ILI9341_Fill_Screen:0000002c $d
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:809    .text.ILI9341_Draw_Pixel:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:815    .text.ILI9341_Draw_Pixel:00000000 ILI9341_Draw_Pixel
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1069   .text.ILI9341_Draw_Pixel:00000174 $d
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1078   .text.ILI9341_Draw_Rectangle:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1084   .text.ILI9341_Draw_Rectangle:00000000 ILI9341_Draw_Rectangle
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1186   .text.ILI9341_Draw_Rectangle:00000068 $d
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1192   .text.ILI9341_Draw_Horizontal_Line:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1198   .text.ILI9341_Draw_Horizontal_Line:00000000 ILI9341_Draw_Horizontal_Line
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1275   .text.ILI9341_Draw_Horizontal_Line:00000048 $d
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1281   .text.ILI9341_Draw_Vertical_Line:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1287   .text.ILI9341_Draw_Vertical_Line:00000000 ILI9341_Draw_Vertical_Line
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1364   .text.ILI9341_Draw_Vertical_Line:00000048 $d
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1383   .data.LCD_WIDTH:00000000 LCD_WIDTH
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1376   .data.LCD_HEIGHT:00000000 LCD_HEIGHT
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1372   .data.LCD_HEIGHT:00000000 $d
+C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1379   .data.LCD_WIDTH:00000000 $d
+
+UNDEFINED SYMBOLS
+MX_SPI1_Init
+MX_GPIO_Init
+HAL_GPIO_WritePin
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 36
+
+
+HAL_SPI_Transmit
+hspi1
+HAL_Delay

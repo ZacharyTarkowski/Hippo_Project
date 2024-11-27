@@ -1,0 +1,390 @@
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"General_Utils.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.printstring,"ax",%progbits
+  20              		.align	1
+  21              		.global	printstring
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	printstring:
+  27              	.LVL0:
+  28              	.LFB137:
+  29              		.file 1 "Core/Src/General_Utils.c"
+   1:Core/Src/General_Utils.c **** /*
+   2:Core/Src/General_Utils.c ****  * UART_Utils.c
+   3:Core/Src/General_Utils.c ****  *
+   4:Core/Src/General_Utils.c ****  *  Created on: Aug 13, 2024
+   5:Core/Src/General_Utils.c ****  *      Author: zacht
+   6:Core/Src/General_Utils.c ****  */
+   7:Core/Src/General_Utils.c **** 
+   8:Core/Src/General_Utils.c **** #include "General_Utils.h"
+   9:Core/Src/General_Utils.c **** 
+  10:Core/Src/General_Utils.c **** /* Master Todo : General Utils
+  11:Core/Src/General_Utils.c ****  *
+  12:Core/Src/General_Utils.c ****  * Probably want to add some form of choose your uart object
+  13:Core/Src/General_Utils.c ****  * Definitely want to abstract the HAL_UART_TRANSMIT calls so other vendor HAL's could be popped in
+  14:Core/Src/General_Utils.c ****  * Do some recieve stuff
+  15:Core/Src/General_Utils.c ****  * Do cool shit like clearing lines for status percentages etc
+  16:Core/Src/General_Utils.c ****  * Not exactly a thread safe file
+  17:Core/Src/General_Utils.c ****  *
+  18:Core/Src/General_Utils.c ****  */
+  19:Core/Src/General_Utils.c **** 
+  20:Core/Src/General_Utils.c **** //UART_HandleTypeDef huart2;
+  21:Core/Src/General_Utils.c **** static char msg_buf[512];
+  22:Core/Src/General_Utils.c **** 
+  23:Core/Src/General_Utils.c **** const char* newlineBuffer = "\r\n";
+  24:Core/Src/General_Utils.c **** 
+  25:Core/Src/General_Utils.c **** //todo fix newlines
+  26:Core/Src/General_Utils.c **** void printstring(char* msg)
+  27:Core/Src/General_Utils.c **** {
+  30              		.loc 1 27 1 view -0
+  31              		.cfi_startproc
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s 			page 2
+
+
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 27 1 is_stmt 0 view .LVU1
+  35 0000 38B5     		push	{r3, r4, r5, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 16
+  38              		.cfi_offset 3, -16
+  39              		.cfi_offset 4, -12
+  40              		.cfi_offset 5, -8
+  41              		.cfi_offset 14, -4
+  42 0002 0446     		mov	r4, r0
+  28:Core/Src/General_Utils.c **** 	HAL_UART_Transmit(&huart2, msg, strlen(msg), HAL_MAX_DELAY);
+  43              		.loc 1 28 2 is_stmt 1 view .LVU2
+  44              		.loc 1 28 34 is_stmt 0 view .LVU3
+  45 0004 FFF7FEFF 		bl	strlen
+  46              	.LVL1:
+  47              		.loc 1 28 2 view .LVU4
+  48 0008 0A4D     		ldr	r5, .L3
+  49 000a 4FF0FF33 		mov	r3, #-1
+  50 000e 82B2     		uxth	r2, r0
+  51 0010 2146     		mov	r1, r4
+  52 0012 2846     		mov	r0, r5
+  53 0014 FFF7FEFF 		bl	HAL_UART_Transmit
+  54              	.LVL2:
+  29:Core/Src/General_Utils.c **** 	HAL_UART_Transmit(&huart2, newlineBuffer, strlen(newlineBuffer), HAL_MAX_DELAY);
+  55              		.loc 1 29 2 is_stmt 1 view .LVU5
+  56 0018 074B     		ldr	r3, .L3+4
+  57 001a 1C68     		ldr	r4, [r3]
+  58              	.LVL3:
+  59              		.loc 1 29 44 is_stmt 0 view .LVU6
+  60 001c 2046     		mov	r0, r4
+  61 001e FFF7FEFF 		bl	strlen
+  62              	.LVL4:
+  63              		.loc 1 29 2 view .LVU7
+  64 0022 4FF0FF33 		mov	r3, #-1
+  65 0026 82B2     		uxth	r2, r0
+  66 0028 2146     		mov	r1, r4
+  67 002a 2846     		mov	r0, r5
+  68 002c FFF7FEFF 		bl	HAL_UART_Transmit
+  69              	.LVL5:
+  30:Core/Src/General_Utils.c **** }
+  70              		.loc 1 30 1 view .LVU8
+  71 0030 38BD     		pop	{r3, r4, r5, pc}
+  72              	.L4:
+  73 0032 00BF     		.align	2
+  74              	.L3:
+  75 0034 00000000 		.word	huart2
+  76 0038 00000000 		.word	.LANCHOR0
+  77              		.cfi_endproc
+  78              	.LFE137:
+  80              		.section	.text.uart_printf,"ax",%progbits
+  81              		.align	1
+  82              		.global	uart_printf
+  83              		.syntax unified
+  84              		.thumb
+  85              		.thumb_func
+  87              	uart_printf:
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s 			page 3
+
+
+  88              	.LVL6:
+  89              	.LFB138:
+  31:Core/Src/General_Utils.c **** 
+  32:Core/Src/General_Utils.c **** void uart_printf(const char* fmt, ...)
+  33:Core/Src/General_Utils.c **** {
+  90              		.loc 1 33 1 is_stmt 1 view -0
+  91              		.cfi_startproc
+  92              		@ args = 4, pretend = 16, frame = 8
+  93              		@ frame_needed = 0, uses_anonymous_args = 1
+  94              		.loc 1 33 1 is_stmt 0 view .LVU10
+  95 0000 0FB4     		push	{r0, r1, r2, r3}
+  96              	.LCFI1:
+  97              		.cfi_def_cfa_offset 16
+  98              		.cfi_offset 0, -16
+  99              		.cfi_offset 1, -12
+ 100              		.cfi_offset 2, -8
+ 101              		.cfi_offset 3, -4
+ 102 0002 10B5     		push	{r4, lr}
+ 103              	.LCFI2:
+ 104              		.cfi_def_cfa_offset 24
+ 105              		.cfi_offset 4, -24
+ 106              		.cfi_offset 14, -20
+ 107 0004 82B0     		sub	sp, sp, #8
+ 108              	.LCFI3:
+ 109              		.cfi_def_cfa_offset 32
+ 110 0006 04AB     		add	r3, sp, #16
+ 111 0008 53F8042B 		ldr	r2, [r3], #4
+  34:Core/Src/General_Utils.c **** 	//variable arguments because I'm cool
+  35:Core/Src/General_Utils.c **** 	va_list args;
+ 112              		.loc 1 35 2 is_stmt 1 view .LVU11
+  36:Core/Src/General_Utils.c **** 	va_start(args, fmt);
+ 113              		.loc 1 36 2 view .LVU12
+ 114 000c 0193     		str	r3, [sp, #4]
+  37:Core/Src/General_Utils.c **** 
+  38:Core/Src/General_Utils.c **** 
+  39:Core/Src/General_Utils.c **** 	//variable snprintf
+  40:Core/Src/General_Utils.c **** 	vsnprintf(msg_buf, sizeof(msg_buf), fmt, args);
+ 115              		.loc 1 40 2 view .LVU13
+ 116 000e 0A4C     		ldr	r4, .L7
+ 117 0010 4FF40071 		mov	r1, #512
+ 118 0014 2046     		mov	r0, r4
+ 119 0016 FFF7FEFF 		bl	vsnprintf
+ 120              	.LVL7:
+  41:Core/Src/General_Utils.c **** 	HAL_UART_Transmit(&huart2, msg_buf, strlen(msg_buf), HAL_MAX_DELAY);
+ 121              		.loc 1 41 2 view .LVU14
+ 122              		.loc 1 41 38 is_stmt 0 view .LVU15
+ 123 001a 2046     		mov	r0, r4
+ 124 001c FFF7FEFF 		bl	strlen
+ 125              	.LVL8:
+ 126              		.loc 1 41 2 view .LVU16
+ 127 0020 4FF0FF33 		mov	r3, #-1
+ 128 0024 82B2     		uxth	r2, r0
+ 129 0026 2146     		mov	r1, r4
+ 130 0028 0448     		ldr	r0, .L7+4
+ 131 002a FFF7FEFF 		bl	HAL_UART_Transmit
+ 132              	.LVL9:
+  42:Core/Src/General_Utils.c **** 
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s 			page 4
+
+
+  43:Core/Src/General_Utils.c **** 	va_end(args);
+ 133              		.loc 1 43 2 is_stmt 1 view .LVU17
+  44:Core/Src/General_Utils.c **** }
+ 134              		.loc 1 44 1 is_stmt 0 view .LVU18
+ 135 002e 02B0     		add	sp, sp, #8
+ 136              	.LCFI4:
+ 137              		.cfi_def_cfa_offset 24
+ 138              		@ sp needed
+ 139 0030 BDE81040 		pop	{r4, lr}
+ 140              	.LCFI5:
+ 141              		.cfi_restore 14
+ 142              		.cfi_restore 4
+ 143              		.cfi_def_cfa_offset 16
+ 144 0034 04B0     		add	sp, sp, #16
+ 145              	.LCFI6:
+ 146              		.cfi_restore 3
+ 147              		.cfi_restore 2
+ 148              		.cfi_restore 1
+ 149              		.cfi_restore 0
+ 150              		.cfi_def_cfa_offset 0
+ 151 0036 7047     		bx	lr
+ 152              	.L8:
+ 153              		.align	2
+ 154              	.L7:
+ 155 0038 00000000 		.word	.LANCHOR1
+ 156 003c 00000000 		.word	huart2
+ 157              		.cfi_endproc
+ 158              	.LFE138:
+ 160              		.section	.text.uart_println,"ax",%progbits
+ 161              		.align	1
+ 162              		.global	uart_println
+ 163              		.syntax unified
+ 164              		.thumb
+ 165              		.thumb_func
+ 167              	uart_println:
+ 168              	.LVL10:
+ 169              	.LFB139:
+  45:Core/Src/General_Utils.c **** 
+  46:Core/Src/General_Utils.c **** void uart_println(const char* fmt, ...)
+  47:Core/Src/General_Utils.c **** {
+ 170              		.loc 1 47 1 is_stmt 1 view -0
+ 171              		.cfi_startproc
+ 172              		@ args = 4, pretend = 16, frame = 8
+ 173              		@ frame_needed = 0, uses_anonymous_args = 1
+ 174              		.loc 1 47 1 is_stmt 0 view .LVU20
+ 175 0000 0FB4     		push	{r0, r1, r2, r3}
+ 176              	.LCFI7:
+ 177              		.cfi_def_cfa_offset 16
+ 178              		.cfi_offset 0, -16
+ 179              		.cfi_offset 1, -12
+ 180              		.cfi_offset 2, -8
+ 181              		.cfi_offset 3, -4
+ 182 0002 30B5     		push	{r4, r5, lr}
+ 183              	.LCFI8:
+ 184              		.cfi_def_cfa_offset 28
+ 185              		.cfi_offset 4, -28
+ 186              		.cfi_offset 5, -24
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s 			page 5
+
+
+ 187              		.cfi_offset 14, -20
+ 188 0004 83B0     		sub	sp, sp, #12
+ 189              	.LCFI9:
+ 190              		.cfi_def_cfa_offset 40
+ 191 0006 06AB     		add	r3, sp, #24
+ 192 0008 53F8042B 		ldr	r2, [r3], #4
+  48:Core/Src/General_Utils.c **** 	//variable arguments because I'm cool
+  49:Core/Src/General_Utils.c **** 	va_list args;
+ 193              		.loc 1 49 2 is_stmt 1 view .LVU21
+  50:Core/Src/General_Utils.c **** 	va_start(args, fmt);
+ 194              		.loc 1 50 2 view .LVU22
+ 195 000c 0193     		str	r3, [sp, #4]
+  51:Core/Src/General_Utils.c **** 
+  52:Core/Src/General_Utils.c **** 
+  53:Core/Src/General_Utils.c **** 	//variable snprintf
+  54:Core/Src/General_Utils.c **** 	vsnprintf(msg_buf, sizeof(msg_buf), fmt, args);
+ 196              		.loc 1 54 2 view .LVU23
+ 197 000e 114C     		ldr	r4, .L11
+ 198 0010 4FF40071 		mov	r1, #512
+ 199 0014 2046     		mov	r0, r4
+ 200 0016 FFF7FEFF 		bl	vsnprintf
+ 201              	.LVL11:
+  55:Core/Src/General_Utils.c **** 	HAL_UART_Transmit(&huart2, msg_buf, strlen(msg_buf), HAL_MAX_DELAY);
+ 202              		.loc 1 55 2 view .LVU24
+ 203              		.loc 1 55 38 is_stmt 0 view .LVU25
+ 204 001a 2046     		mov	r0, r4
+ 205 001c FFF7FEFF 		bl	strlen
+ 206              	.LVL12:
+ 207              		.loc 1 55 2 view .LVU26
+ 208 0020 0D4D     		ldr	r5, .L11+4
+ 209 0022 4FF0FF33 		mov	r3, #-1
+ 210 0026 82B2     		uxth	r2, r0
+ 211 0028 2146     		mov	r1, r4
+ 212 002a 2846     		mov	r0, r5
+ 213 002c FFF7FEFF 		bl	HAL_UART_Transmit
+ 214              	.LVL13:
+  56:Core/Src/General_Utils.c **** 
+  57:Core/Src/General_Utils.c **** 	//send a newline
+  58:Core/Src/General_Utils.c **** 	HAL_UART_Transmit(&huart2, newlineBuffer, strlen(newlineBuffer), HAL_MAX_DELAY);
+ 215              		.loc 1 58 2 is_stmt 1 view .LVU27
+ 216 0030 0A4B     		ldr	r3, .L11+8
+ 217 0032 1C68     		ldr	r4, [r3]
+ 218              		.loc 1 58 44 is_stmt 0 view .LVU28
+ 219 0034 2046     		mov	r0, r4
+ 220 0036 FFF7FEFF 		bl	strlen
+ 221              	.LVL14:
+ 222              		.loc 1 58 2 view .LVU29
+ 223 003a 4FF0FF33 		mov	r3, #-1
+ 224 003e 82B2     		uxth	r2, r0
+ 225 0040 2146     		mov	r1, r4
+ 226 0042 2846     		mov	r0, r5
+ 227 0044 FFF7FEFF 		bl	HAL_UART_Transmit
+ 228              	.LVL15:
+  59:Core/Src/General_Utils.c **** 
+  60:Core/Src/General_Utils.c **** 	va_end(args);
+ 229              		.loc 1 60 2 is_stmt 1 view .LVU30
+  61:Core/Src/General_Utils.c **** }
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s 			page 6
+
+
+ 230              		.loc 1 61 1 is_stmt 0 view .LVU31
+ 231 0048 03B0     		add	sp, sp, #12
+ 232              	.LCFI10:
+ 233              		.cfi_def_cfa_offset 28
+ 234              		@ sp needed
+ 235 004a BDE83040 		pop	{r4, r5, lr}
+ 236              	.LCFI11:
+ 237              		.cfi_restore 14
+ 238              		.cfi_restore 5
+ 239              		.cfi_restore 4
+ 240              		.cfi_def_cfa_offset 16
+ 241 004e 04B0     		add	sp, sp, #16
+ 242              	.LCFI12:
+ 243              		.cfi_restore 3
+ 244              		.cfi_restore 2
+ 245              		.cfi_restore 1
+ 246              		.cfi_restore 0
+ 247              		.cfi_def_cfa_offset 0
+ 248 0050 7047     		bx	lr
+ 249              	.L12:
+ 250 0052 00BF     		.align	2
+ 251              	.L11:
+ 252 0054 00000000 		.word	.LANCHOR1
+ 253 0058 00000000 		.word	huart2
+ 254 005c 00000000 		.word	.LANCHOR0
+ 255              		.cfi_endproc
+ 256              	.LFE139:
+ 258              		.global	newlineBuffer
+ 259              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 260              		.align	2
+ 261              	.LC0:
+ 262 0000 0D0A00   		.ascii	"\015\012\000"
+ 263              		.section	.bss.msg_buf,"aw",%nobits
+ 264              		.align	2
+ 265              		.set	.LANCHOR1,. + 0
+ 268              	msg_buf:
+ 269 0000 00000000 		.space	512
+ 269      00000000 
+ 269      00000000 
+ 269      00000000 
+ 269      00000000 
+ 270              		.section	.data.newlineBuffer,"aw"
+ 271              		.align	2
+ 272              		.set	.LANCHOR0,. + 0
+ 275              	newlineBuffer:
+ 276 0000 00000000 		.word	.LC0
+ 277              		.text
+ 278              	.Letext0:
+ 279              		.file 2 "c:\\users\\zacht\\desktop\\files\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\\
+ 280              		.file 3 "c:\\users\\zacht\\desktop\\files\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\\
+ 281              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h"
+ 282              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 283              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 284              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
+ 285              		.file 8 "c:\\users\\zacht\\desktop\\files\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\\
+ 286              		.file 9 "c:\\users\\zacht\\desktop\\files\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\\
+ 287              		.file 10 "Core/Inc/usart.h"
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s 			page 7
+
+
+ 288              		.file 11 "c:\\users\\zacht\\desktop\\files\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\
+ 289              		.file 12 "<built-in>"
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 General_Utils.c
+C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s:20     .text.printstring:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s:26     .text.printstring:00000000 printstring
+C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s:75     .text.printstring:00000034 $d
+C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s:81     .text.uart_printf:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s:87     .text.uart_printf:00000000 uart_printf
+C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s:155    .text.uart_printf:00000038 $d
+C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s:161    .text.uart_println:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s:167    .text.uart_println:00000000 uart_println
+C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s:252    .text.uart_println:00000054 $d
+C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s:275    .data.newlineBuffer:00000000 newlineBuffer
+C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s:260    .rodata.str1.4:00000000 $d
+C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s:264    .bss.msg_buf:00000000 $d
+C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s:268    .bss.msg_buf:00000000 msg_buf
+C:\Users\zacht\AppData\Local\Temp\ccRBRwPg.s:271    .data.newlineBuffer:00000000 $d
+
+UNDEFINED SYMBOLS
+strlen
+HAL_UART_Transmit
+huart2
+vsnprintf
