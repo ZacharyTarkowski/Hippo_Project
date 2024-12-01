@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s 			page 1
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s 			page 1
   28:Core/Src/usart.c **** 
   29:Core/Src/usart.c **** /* USART2 init function */
   30:Core/Src/usart.c **** 
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s 			page 2
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 2
 
 
   31:Core/Src/usart.c **** void MX_USART2_UART_Init(void)
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s 			page 1
   65              		.loc 1 48 28 is_stmt 0 view .LVU16
   66 001c C361     		str	r3, [r0, #28]
   49:Core/Src/usart.c ****   if (HAL_UART_Init(&huart2) != HAL_OK)
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s 			page 3
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 3
 
 
   67              		.loc 1 49 3 is_stmt 1 view .LVU17
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s 			page 1
  111              		.cfi_def_cfa_offset 40
   61:Core/Src/usart.c **** 
   62:Core/Src/usart.c ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s 			page 4
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 4
 
 
  112              		.loc 1 62 3 is_stmt 1 view .LVU25
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s 			page 1
  140              		.loc 1 69 5 is_stmt 1 view .LVU31
  141              	.LBB2:
   69:Core/Src/usart.c **** 
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s 			page 5
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 5
 
 
  142              		.loc 1 69 5 view .LVU32
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s 			page 1
   78:Core/Src/usart.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
  182              		.loc 1 78 5 is_stmt 1 view .LVU47
   79:Core/Src/usart.c ****     GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s 			page 6
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 6
 
 
  183              		.loc 1 79 5 view .LVU48
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s 			page 1
  230 0006 9A42     		cmp	r2, r3
  231 0008 00D0     		beq	.L16
  232              	.LVL8:
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s 			page 7
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 7
 
 
  233              	.L13:
@@ -418,14 +418,14 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s 			page 1
  268      00000000 
  268      00000000 
  268      00000000 
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s 			page 8
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 8
 
 
  268      00000000 
  269              		.text
  270              	.Letext0:
- 271              		.file 2 "c:\\users\\zacht\\desktop\\files\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\\
- 272              		.file 3 "c:\\users\\zacht\\desktop\\files\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\\
+ 271              		.file 2 "c:\\users\\zacht\\documents\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\\arm-n
+ 272              		.file 3 "c:\\users\\zacht\\documents\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\\arm-n
  273              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h"
  274              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
  275              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
@@ -433,22 +433,22 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s 			page 1
  277              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
  278              		.file 9 "Core/Inc/main.h"
  279              		.file 10 "Core/Inc/usart.h"
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s 			page 9
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 usart.c
-C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s:20     .text.MX_USART2_UART_Init:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s:26     .text.MX_USART2_UART_Init:00000000 MX_USART2_UART_Init
-C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s:85     .text.MX_USART2_UART_Init:0000002c $d
-C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s:91     .text.HAL_UART_MspInit:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s:97     .text.HAL_UART_MspInit:00000000 HAL_UART_MspInit
-C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s:200    .text.HAL_UART_MspInit:00000064 $d
-C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s:206    .text.HAL_UART_MspDeInit:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s:212    .text.HAL_UART_MspDeInit:00000000 HAL_UART_MspDeInit
-C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s:255    .text.HAL_UART_MspDeInit:00000020 $d
-C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s:267    .bss.huart2:00000000 huart2
-C:\Users\zacht\AppData\Local\Temp\ccyZyL4l.s:263    .bss.huart2:00000000 $d
+C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:20     .text.MX_USART2_UART_Init:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:26     .text.MX_USART2_UART_Init:00000000 MX_USART2_UART_Init
+C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:85     .text.MX_USART2_UART_Init:0000002c $d
+C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:91     .text.HAL_UART_MspInit:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:97     .text.HAL_UART_MspInit:00000000 HAL_UART_MspInit
+C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:200    .text.HAL_UART_MspInit:00000064 $d
+C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:206    .text.HAL_UART_MspDeInit:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:212    .text.HAL_UART_MspDeInit:00000000 HAL_UART_MspDeInit
+C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:255    .text.HAL_UART_MspDeInit:00000020 $d
+C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:267    .bss.huart2:00000000 huart2
+C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:263    .bss.huart2:00000000 $d
 
 UNDEFINED SYMBOLS
 HAL_UART_Init

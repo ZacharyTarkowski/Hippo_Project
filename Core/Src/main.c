@@ -25,10 +25,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
-#include "ILI9341_STM32_Driver.h"
-#include "General_Utils.h"
-#include "Hippo_Images.h"
-#include "ili9341.h"
+#include "Hippo_Logic.h"
 
 /* USER CODE END Includes */
 
@@ -51,6 +48,8 @@
 
 /* USER CODE BEGIN PV */
 
+volatile u8 ir_sensor_flag;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -61,12 +60,6 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
-void init() {
-    ILI9341_Unselect();
-
-    ILI9341_Init();
-}
 
 /* USER CODE END 0 */
 
@@ -103,11 +96,12 @@ int main(void)
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
 
+  ILI9341_Unselect();
+  ILI9341_Init();
+  ILI9341_FillScreen(ILI9341_BLACK);
 
-       ILI9341_Unselect();
+  STATE_E state = STATE_IDLE;
 
-        ILI9341_Init();
-      ILI9341_FillScreen(ILI9341_BLACK);
       
   /* USER CODE END 2 */
 
@@ -116,13 +110,29 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    ILI9341_DrawImage(0, 0, 240, 320, (const uint16_t*)frame_8_delay_0_67s);
-    HAL_Delay(125);
-    ILI9341_DrawImage(0, 0, 240, 320, (const uint16_t*)frame_3_delay_0_22s);
-    HAL_Delay(125);
-    ILI9341_DrawImage(0, 0, 240, 320, (const uint16_t*)frame_0_delay_0_22s);
+    
+    switch(state)
+    {
+      case STATE_IDLE:
 
-    HAL_Delay(500);
+      run_idle_state();
+      if(ir_sensor_flag == 1)
+      {
+        state = STATE_ACTIVE;
+      }
+      break;
+
+      case STATE_ACTIVE:
+
+      run_active_state();
+      if(ir_sensor_flag == 0)
+      {
+        state = STATE_IDLE;
+      }
+      break;
+
+    }
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

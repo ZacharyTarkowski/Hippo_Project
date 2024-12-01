@@ -21,7 +21,10 @@
         "spi.h": "c",
         "snow_tiger.h": "c",
         "ili9341.h": "c",
-        "testimg.h": "c"
+        "testimg.h": "c",
+        "hippo_logic.h": "c",
+        "hippo_images.h": "c"
     },
-    "cortex-debug.variableUseNaturalFormat": false
+    "cortex-debug.variableUseNaturalFormat": false,
+    "cmake.sourceDirectory": "C:/Users/zacht/Documents/Projects/Hippo_STM/Hippo_Project/Drivers/CMSIS/DSP/Source"
 }

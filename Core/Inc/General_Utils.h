@@ -23,6 +23,11 @@ typedef enum {
     DIVIDE,
 }operation_e;
 
+typedef enum {
+    STATE_IDLE,
+    STATE_ACTIVE
+}STATE_E;
+
 
 #define u8 uint8_t
 #define u16 uint16_t

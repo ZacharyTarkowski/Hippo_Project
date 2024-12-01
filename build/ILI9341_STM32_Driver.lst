@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
   28:Core/Src/ILI9341_STM32_Driver.c **** //-----------------------------------
   29:Core/Src/ILI9341_STM32_Driver.c **** //
   30:Core/Src/ILI9341_STM32_Driver.c **** //	While there are other libraries for ILI9341 they mostly require either interrupts, DMA or both f
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 2
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 2
 
 
   31:Core/Src/ILI9341_STM32_Driver.c **** //	The intent of this library is to offer a simple yet still reasonably fast alternatives for those
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
   85:Core/Src/ILI9341_STM32_Driver.c **** #include "spi.h"
   86:Core/Src/ILI9341_STM32_Driver.c **** #include "gpio.h"
   87:Core/Src/ILI9341_STM32_Driver.c **** 
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 3
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 3
 
 
   88:Core/Src/ILI9341_STM32_Driver.c **** /* Global Variables ------------------------------------------------------------------*/
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
   70              		.cfi_startproc
   71              		@ args = 0, pretend = 0, frame = 8
   72              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 4
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 4
 
 
   73              		.loc 1 102 1 is_stmt 0 view .LVU6
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  123              		.cfi_offset 4, -12
  124              		.cfi_offset 5, -8
  125              		.cfi_offset 14, -4
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 5
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 5
 
 
  126 0002 0446     		mov	r4, r0
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  173              		.cfi_startproc
  174              		@ args = 0, pretend = 0, frame = 0
  175              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 6
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 6
 
 
  176              		.loc 1 117 1 is_stmt 0 view .LVU19
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  227              	ILI9341_Set_Address:
  228              	.LVL18:
  229              	.LFB138:
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 7
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 7
 
 
  123:Core/Src/ILI9341_STM32_Driver.c **** 
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  273              	.LVL25:
  134:Core/Src/ILI9341_STM32_Driver.c **** ILI9341_Write_Data(Y1>>8);
  274              		.loc 1 134 1 view .LVU35
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 8
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 8
 
 
  275 002e 280A     		lsrs	r0, r5, #8
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  320 0006 8021     		movs	r1, #128
  321 0008 2046     		mov	r0, r4
  322 000a FFF7FEFF 		bl	HAL_GPIO_WritePin
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 9
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 9
 
 
  323              	.LVL31:
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  370              	.LCFI8:
  371              		.cfi_def_cfa_offset 8
  372              		.cfi_offset 4, -8
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 10
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 10
 
 
  373              		.cfi_offset 14, -4
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  168:Core/Src/ILI9341_STM32_Driver.c **** 		case SCREEN_HORIZONTAL_1:
  169:Core/Src/ILI9341_STM32_Driver.c **** 			ILI9341_Write_Data(0x20|0x08);
  170:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_WIDTH  = 320;
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 11
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 11
 
 
  171:Core/Src/ILI9341_STM32_Driver.c **** 			LCD_HEIGHT = 240;
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  442 0050 F022     		movs	r2, #240
  443 0052 1A80     		strh	r2, [r3]	@ movhi
  176:Core/Src/ILI9341_STM32_Driver.c **** 			break;
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 12
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 12
 
 
  444              		.loc 1 176 4 is_stmt 1 view .LVU71
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  488              		@ args = 0, pretend = 0, frame = 0
  489              		@ frame_needed = 0, uses_anonymous_args = 0
  490 0000 08B5     		push	{r3, lr}
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 13
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 13
 
 
  491              	.LCFI9:
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  219:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x30);
  220:Core/Src/ILI9341_STM32_Driver.c **** 
  221:Core/Src/ILI9341_STM32_Driver.c **** // //DRIVER TIMING CONTROL A
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 14
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 14
 
 
  222:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Command(0xE8);
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  276:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x82);
  277:Core/Src/ILI9341_STM32_Driver.c **** // ILI9341_Write_Data(0x27);
  278:Core/Src/ILI9341_STM32_Driver.c **** 
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 15
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 15
 
 
  279:Core/Src/ILI9341_STM32_Driver.c **** // //3GAMMA FUNCTION DISABLE
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  333:Core/Src/ILI9341_STM32_Driver.c **** 
  334:Core/Src/ILI9341_STM32_Driver.c **** //INTERNAL FUNCTION OF LIBRARY, USAGE NOT RECOMENDED, USE Draw_Pixel INSTEAD
  335:Core/Src/ILI9341_STM32_Driver.c **** /*Sends single pixel colour information to LCD*/
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 16
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 16
 
 
  336:Core/Src/ILI9341_STM32_Driver.c **** void ILI9341_Draw_Colour(uint16_t Colour)
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  344:Core/Src/ILI9341_STM32_Driver.c **** }
  566              		.loc 1 344 1 is_stmt 0 view .LVU93
  567 003e 02B0     		add	sp, sp, #8
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 17
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 17
 
 
  568              	.LCFI12:
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  616 000a 4FEA4108 		lsl	r8, r1, #1
  617              		.loc 1 352 3 view .LVU99
  618 000e B8F5FA7F 		cmp	r8, #500
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 18
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 18
 
 
  619 0012 01D3     		bcc	.L42
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  659              	.LVL62:
  660              	.L44:
  367:Core/Src/ILI9341_STM32_Driver.c **** 	{
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 19
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 19
 
 
  368:Core/Src/ILI9341_STM32_Driver.c **** 		burst_buffer[j] = 	chifted;
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  384:Core/Src/ILI9341_STM32_Driver.c **** //REMAINDER!
  385:Core/Src/ILI9341_STM32_Driver.c **** HAL_SPI_Transmit(HSPI_INSTANCE, (unsigned char *)burst_buffer, Remainder_from_block, 10);	
  695              		.loc 1 385 1 is_stmt 1 view .LVU130
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 20
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 20
 
 
  696 0058 0A23     		movs	r3, #10
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  740 008c F5E7     		b	.L45
  741              	.L52:
  742 008e 00BF     		.align	2
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 21
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 21
 
 
  743              	.L51:
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  792 001e 89B2     		uxth	r1, r1
  793              		.loc 1 395 1 view .LVU146
  794 0020 03FB01F1 		mul	r1, r3, r1
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 22
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 22
 
 
  795 0024 2046     		mov	r0, r4
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  839              		.cfi_offset 14, -4
  840 0010 84B0     		sub	sp, sp, #16
  841              	.LCFI19:
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 23
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 23
 
 
  842              		.cfi_def_cfa_offset 40
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  855              		.loc 1 447 1 view .LVU155
  856 0022 04B0     		add	sp, sp, #16
  857              	.LCFI20:
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 24
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 24
 
 
  858              		.cfi_remember_state
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  903 0060 0022     		movs	r2, #0
  904 0062 4FF40071 		mov	r1, #512
  905 0066 3046     		mov	r0, r6
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 25
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 25
 
 
  906 0068 FFF7FEFF 		bl	HAL_GPIO_WritePin
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  949              	.LVL93:
  424:Core/Src/ILI9341_STM32_Driver.c **** HAL_GPIO_WritePin(LCD_DC_PORT, LCD_DC_PIN, GPIO_PIN_SET);			
  950              		.loc 1 424 1 view .LVU176
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 26
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 26
 
 
  951 00b6 2B20     		movs	r0, #43
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  994              	.LVL98:
  432:Core/Src/ILI9341_STM32_Driver.c **** 
  995              		.loc 1 432 1 view .LVU188
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 27
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 27
 
 
  996 0104 0122     		movs	r2, #1
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  1041 0158 0123     		movs	r3, #1
  1042 015a 0222     		movs	r2, #2
  1043 015c 01A9     		add	r1, sp, #4
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 28
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 28
 
 
  1044 015e 2046     		mov	r0, r4
@@ -1678,7 +1678,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  1089              		@ args = 4, pretend = 0, frame = 0
  1090              		@ frame_needed = 0, uses_anonymous_args = 0
  1091              		.loc 1 456 1 is_stmt 0 view .LVU201
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 29
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 29
 
 
  1092 0000 38B5     		push	{r3, r4, r5, lr}
@@ -1738,7 +1738,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  1140              		.loc 1 462 6 is_stmt 0 view .LVU216
  1141 0030 0A19     		adds	r2, r1, r4
  1142              		.loc 1 462 16 view .LVU217
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 30
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 30
 
 
  1143 0032 0E4B     		ldr	r3, .L73+4
@@ -1798,7 +1798,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  1192              		.align	1
  1193              		.global	ILI9341_Draw_Horizontal_Line
  1194              		.syntax unified
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 31
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 31
 
 
  1195              		.thumb
@@ -1858,7 +1858,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  475:Core/Src/ILI9341_STM32_Driver.c **** 	{
  476:Core/Src/ILI9341_STM32_Driver.c **** 		Width=LCD_WIDTH-X;
  1244              		.loc 1 476 3 is_stmt 1 view .LVU242
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 32
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 32
 
 
  1245              		.loc 1 476 18 is_stmt 0 view .LVU243
@@ -1918,7 +1918,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  1293              		@ frame_needed = 0, uses_anonymous_args = 0
  1294              		.loc 1 484 1 is_stmt 0 view .LVU251
  1295 0000 38B5     		push	{r3, r4, r5, lr}
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 33
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 33
 
 
  1296              	.LCFI25:
@@ -1978,7 +1978,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  1344              		.loc 1 490 31 is_stmt 0 view .LVU267
  1345 0030 6318     		adds	r3, r4, r1
  1346 0032 9BB2     		uxth	r3, r3
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 34
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 34
 
 
  1347              		.loc 1 490 1 view .LVU268
@@ -2018,8 +2018,8 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  1384 0000 F000     		.short	240
  1385              		.text
  1386              	.Letext0:
- 1387              		.file 2 "c:\\users\\zacht\\desktop\\files\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\\
- 1388              		.file 3 "c:\\users\\zacht\\desktop\\files\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\\
+ 1387              		.file 2 "c:\\users\\zacht\\documents\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\\arm-n
+ 1388              		.file 3 "c:\\users\\zacht\\documents\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\\arm-n
  1389              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h"
  1390              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
  1391              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
@@ -2028,67 +2028,67 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 1
  1394              		.file 9 "Core/Inc/spi.h"
  1395              		.file 10 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h"
  1396              		.file 11 "Core/Inc/gpio.h"
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 35
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 35
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 ILI9341_STM32_Driver.c
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:20     .text.ILI9341_SPI_Init:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:26     .text.ILI9341_SPI_Init:00000000 ILI9341_SPI_Init
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:55     .text.ILI9341_SPI_Init:00000018 $d
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:60     .text.ILI9341_SPI_Send:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:66     .text.ILI9341_SPI_Send:00000000 ILI9341_SPI_Send
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:100    .text.ILI9341_SPI_Send:0000001c $d
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:105    .text.ILI9341_Write_Command:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:111    .text.ILI9341_Write_Command:00000000 ILI9341_Write_Command
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:157    .text.ILI9341_Write_Command:00000030 $d
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:163    .text.ILI9341_Write_Data:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:169    .text.ILI9341_Write_Data:00000000 ILI9341_Write_Data
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:215    .text.ILI9341_Write_Data:00000030 $d
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:221    .text.ILI9341_Set_Address:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:227    .text.ILI9341_Set_Address:00000000 ILI9341_Set_Address
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:300    .text.ILI9341_Reset:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:306    .text.ILI9341_Reset:00000000 ILI9341_Reset
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:349    .text.ILI9341_Reset:00000034 $d
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:355    .text.ILI9341_Set_Rotation:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:361    .text.ILI9341_Set_Rotation:00000000 ILI9341_Set_Rotation
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:392    .text.ILI9341_Set_Rotation:00000018 $d
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:396    .text.ILI9341_Set_Rotation:0000001c $t
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:472    .text.ILI9341_Set_Rotation:00000074 $d
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:478    .text.ILI9341_Enable:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:484    .text.ILI9341_Enable:00000000 ILI9341_Enable
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:506    .text.ILI9341_Enable:00000010 $d
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:511    .text.ILI9341_Draw_Colour:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:517    .text.ILI9341_Draw_Colour:00000000 ILI9341_Draw_Colour
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:575    .text.ILI9341_Draw_Colour:00000044 $d
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:582    .text.ILI9341_Draw_Colour_Burst:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:588    .text.ILI9341_Draw_Colour_Burst:00000000 ILI9341_Draw_Colour_Burst
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:744    .text.ILI9341_Draw_Colour_Burst:00000090 $d
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:752    .text.ILI9341_Fill_Screen:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:758    .text.ILI9341_Fill_Screen:00000000 ILI9341_Fill_Screen
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:803    .text.ILI9341_Fill_Screen:0000002c $d
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:809    .text.ILI9341_Draw_Pixel:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:815    .text.ILI9341_Draw_Pixel:00000000 ILI9341_Draw_Pixel
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1069   .text.ILI9341_Draw_Pixel:00000174 $d
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1078   .text.ILI9341_Draw_Rectangle:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1084   .text.ILI9341_Draw_Rectangle:00000000 ILI9341_Draw_Rectangle
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1186   .text.ILI9341_Draw_Rectangle:00000068 $d
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1192   .text.ILI9341_Draw_Horizontal_Line:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1198   .text.ILI9341_Draw_Horizontal_Line:00000000 ILI9341_Draw_Horizontal_Line
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1275   .text.ILI9341_Draw_Horizontal_Line:00000048 $d
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1281   .text.ILI9341_Draw_Vertical_Line:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1287   .text.ILI9341_Draw_Vertical_Line:00000000 ILI9341_Draw_Vertical_Line
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1364   .text.ILI9341_Draw_Vertical_Line:00000048 $d
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1383   .data.LCD_WIDTH:00000000 LCD_WIDTH
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1376   .data.LCD_HEIGHT:00000000 LCD_HEIGHT
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1372   .data.LCD_HEIGHT:00000000 $d
-C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s:1379   .data.LCD_WIDTH:00000000 $d
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:20     .text.ILI9341_SPI_Init:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:26     .text.ILI9341_SPI_Init:00000000 ILI9341_SPI_Init
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:55     .text.ILI9341_SPI_Init:00000018 $d
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:60     .text.ILI9341_SPI_Send:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:66     .text.ILI9341_SPI_Send:00000000 ILI9341_SPI_Send
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:100    .text.ILI9341_SPI_Send:0000001c $d
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:105    .text.ILI9341_Write_Command:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:111    .text.ILI9341_Write_Command:00000000 ILI9341_Write_Command
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:157    .text.ILI9341_Write_Command:00000030 $d
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:163    .text.ILI9341_Write_Data:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:169    .text.ILI9341_Write_Data:00000000 ILI9341_Write_Data
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:215    .text.ILI9341_Write_Data:00000030 $d
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:221    .text.ILI9341_Set_Address:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:227    .text.ILI9341_Set_Address:00000000 ILI9341_Set_Address
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:300    .text.ILI9341_Reset:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:306    .text.ILI9341_Reset:00000000 ILI9341_Reset
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:349    .text.ILI9341_Reset:00000034 $d
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:355    .text.ILI9341_Set_Rotation:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:361    .text.ILI9341_Set_Rotation:00000000 ILI9341_Set_Rotation
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:392    .text.ILI9341_Set_Rotation:00000018 $d
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:396    .text.ILI9341_Set_Rotation:0000001c $t
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:472    .text.ILI9341_Set_Rotation:00000074 $d
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:478    .text.ILI9341_Enable:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:484    .text.ILI9341_Enable:00000000 ILI9341_Enable
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:506    .text.ILI9341_Enable:00000010 $d
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:511    .text.ILI9341_Draw_Colour:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:517    .text.ILI9341_Draw_Colour:00000000 ILI9341_Draw_Colour
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:575    .text.ILI9341_Draw_Colour:00000044 $d
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:582    .text.ILI9341_Draw_Colour_Burst:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:588    .text.ILI9341_Draw_Colour_Burst:00000000 ILI9341_Draw_Colour_Burst
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:744    .text.ILI9341_Draw_Colour_Burst:00000090 $d
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:752    .text.ILI9341_Fill_Screen:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:758    .text.ILI9341_Fill_Screen:00000000 ILI9341_Fill_Screen
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:803    .text.ILI9341_Fill_Screen:0000002c $d
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:809    .text.ILI9341_Draw_Pixel:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:815    .text.ILI9341_Draw_Pixel:00000000 ILI9341_Draw_Pixel
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:1069   .text.ILI9341_Draw_Pixel:00000174 $d
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:1078   .text.ILI9341_Draw_Rectangle:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:1084   .text.ILI9341_Draw_Rectangle:00000000 ILI9341_Draw_Rectangle
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:1186   .text.ILI9341_Draw_Rectangle:00000068 $d
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:1192   .text.ILI9341_Draw_Horizontal_Line:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:1198   .text.ILI9341_Draw_Horizontal_Line:00000000 ILI9341_Draw_Horizontal_Line
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:1275   .text.ILI9341_Draw_Horizontal_Line:00000048 $d
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:1281   .text.ILI9341_Draw_Vertical_Line:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:1287   .text.ILI9341_Draw_Vertical_Line:00000000 ILI9341_Draw_Vertical_Line
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:1364   .text.ILI9341_Draw_Vertical_Line:00000048 $d
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:1383   .data.LCD_WIDTH:00000000 LCD_WIDTH
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:1376   .data.LCD_HEIGHT:00000000 LCD_HEIGHT
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:1372   .data.LCD_HEIGHT:00000000 $d
+C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s:1379   .data.LCD_WIDTH:00000000 $d
 
 UNDEFINED SYMBOLS
 MX_SPI1_Init
 MX_GPIO_Init
 HAL_GPIO_WritePin
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccQdl4FF.s 			page 36
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccADnVOB.s 			page 36
 
 
 HAL_SPI_Transmit

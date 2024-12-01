@@ -38,6 +38,7 @@ BUILD_DIR = build
 C_SOURCES =  \
 Core/Src/main.c \
 Core/Src/General_Utils.c \
+Core/Src/Hippo_Logic.c \
 Core/Src/ili9341.c \
 Core/Src/gpio.c \
 Core/Src/spi.c \
