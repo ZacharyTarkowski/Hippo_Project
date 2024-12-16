@@ -1,0 +1,3 @@
+gcc -o Run_Length_Encode.o Run_Length_Encode.c ; ./Run_Length_Encode.o 
+
+ cd C:/Users/zacht/Desktop/Files/Projects/Hippo_STM/Hippo_Project/

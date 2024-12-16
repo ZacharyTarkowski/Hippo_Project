@@ -26,6 +26,7 @@
 /* USER CODE BEGIN Includes */
 
 #include "Hippo_Logic.h"
+#include "General_Utils.h"
 
 /* USER CODE END Includes */
 
@@ -48,7 +49,28 @@
 
 /* USER CODE BEGIN PV */
 
+
+volatile u32 ir_sensor_flag_valid_time;
 volatile u8 ir_sensor_flag;
+//should make a interruptutils
+
+// void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+// {
+// 	u32 ir_sensor_flag_current_time;
+
+// 	switch(GPIO_Pin)
+// 	{
+//     case GPIO_PIN_10:
+//       ir_sensor_flag = !ir_sensor_flag;
+//       uart_println("Unhandled interrupt triggered %d",GPIO_Pin);
+//       break;
+
+//     default:
+      
+// 		break;
+// 	}
+// }
+
 
 /* USER CODE END PV */
 
@@ -80,7 +102,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+ 
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -92,17 +114,15 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_USART2_UART_Init();
   MX_SPI1_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
   ILI9341_Unselect();
   ILI9341_Init();
   ILI9341_FillScreen(ILI9341_BLACK);
 
   STATE_E state = STATE_IDLE;
 
-      
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -110,30 +130,33 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    
+
+    /* USER CODE BEGIN 3 */
+    ir_sensor_flag = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_10);
+
     switch(state)
     {
       case STATE_IDLE:
 
-      run_idle_state();
-      if(ir_sensor_flag == 1)
-      {
-        state = STATE_ACTIVE;
-      }
+        run_idle_state();
+        if(ir_sensor_flag == GPIO_PIN_RESET)
+        {
+          state = STATE_ACTIVE;
+        }
       break;
 
       case STATE_ACTIVE:
-
-      run_active_state();
-      if(ir_sensor_flag == 0)
-      {
-        state = STATE_IDLE;
-      }
+        run_active_state();
+        if(ir_sensor_flag == GPIO_PIN_SET)
+        {
+          state = STATE_IDLE;
+        }
       break;
 
+      default:
+        uart_println("Bad state");
+      break;
     }
-
-    /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
@@ -160,10 +183,10 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
-  RCC_OscInitStruct.PLL.PLLM = 16;
-  RCC_OscInitStruct.PLL.PLLN = 336;
-  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
-  RCC_OscInitStruct.PLL.PLLQ = 7;
+  RCC_OscInitStruct.PLL.PLLM = 8;
+  RCC_OscInitStruct.PLL.PLLN = 84;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+  RCC_OscInitStruct.PLL.PLLQ = 4;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -176,7 +199,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {

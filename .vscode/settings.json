@@ -23,7 +23,9 @@
         "ili9341.h": "c",
         "testimg.h": "c",
         "hippo_logic.h": "c",
-        "hippo_images.h": "c"
+        "hippo_images.h": "c",
+        "usart.h": "c",
+        "type_traits": "c"
     },
     "cortex-debug.variableUseNaturalFormat": false,
     "cmake.sourceDirectory": "C:/Users/zacht/Documents/Projects/Hippo_STM/Hippo_Project/Drivers/CMSIS/DSP/Source"

@@ -87,9 +87,9 @@
 #include "stm32f4xx_hal.h"
 
 
-#define CS_Pin GPIO_PIN_9
-#define DC_Pin GPIO_PIN_6
-#define RST_Pin GPIO_PIN_7
+#define CS_Pin GPIO_PIN_0
+#define RST_Pin GPIO_PIN_1
+#define DC_Pin GPIO_PIN_2
 
 
 #define ILI9341_SCREEN_HEIGHT 320 
@@ -99,16 +99,17 @@
 #define HSPI_INSTANCE							&hspi1
 
 //CHIP SELECT PIN AND PORT, STANDARD GPIO
-#define LCD_CS_PORT								GPIOA
+#define LCD_CS_PORT								GPIOB
 #define LCD_CS_PIN								CS_Pin
+
+//RESET PIN AND PORT, STANDARD GPIO
+#define	LCD_RST_PORT							GPIOB
+#define	LCD_RST_PIN								RST_Pin
 
 //DATA COMMAND PIN AND PORT, STANDARD GPIO
 #define LCD_DC_PORT								GPIOB
 #define LCD_DC_PIN								DC_Pin
 
-//RESET PIN AND PORT, STANDARD GPIO
-#define	LCD_RST_PORT							GPIOC
-#define	LCD_RST_PIN								RST_Pin
 
 
 #define BURST_MAX_SIZE 	500

@@ -17,11 +17,11 @@
 #define ILI9341_SPI_PORT hspi1
 extern SPI_HandleTypeDef ILI9341_SPI_PORT;
 
-#define ILI9341_RES_Pin       GPIO_PIN_7
-#define ILI9341_RES_GPIO_Port GPIOC
-#define ILI9341_CS_Pin        GPIO_PIN_9
-#define ILI9341_CS_GPIO_Port  GPIOA
-#define ILI9341_DC_Pin        GPIO_PIN_6
+#define ILI9341_CS_Pin        GPIO_PIN_0
+#define ILI9341_CS_GPIO_Port  GPIOB
+#define ILI9341_RES_Pin       GPIO_PIN_1
+#define ILI9341_RES_GPIO_Port GPIOB
+#define ILI9341_DC_Pin        GPIO_PIN_2
 #define ILI9341_DC_GPIO_Port  GPIOB
 
 // default orientation
@@ -73,5 +73,6 @@ void ILI9341_FillRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint1
 void ILI9341_FillScreen(uint16_t color);
 void ILI9341_DrawImage(uint16_t x, uint16_t y, uint16_t w, uint16_t h, const uint16_t* data);
 void ILI9341_InvertColors(bool invert);
+void ILI9341_Draw_Run_Length_Encoded_Image(const uint16_t* data, uint32_t len) ;
 
 #endif // __ILI9341_H__

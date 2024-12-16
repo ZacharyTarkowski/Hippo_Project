@@ -1,93 +1,70 @@
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
-#include <string.h>
+#include "Raw_Images.h"
 
-#include "../Core/Inc/Hippo_Images.h"
+#define rle_element uint16_t
 
-#define MAX_RLEN 50
+rle_element test_vector[] = {0,0,0,0,0,1,1,1,1,1,2,2,2,2};
 
-/* Returns the Run Length Encoded string for the 
-source string src */
-char* encode(char* src)
+rle_element* encode(rle_element* image, int* len)
 {
-	int rLen;
-	char count[MAX_RLEN];
-	int len = strlen(src);
-
-	/* If all characters in the source string are different, 
-	then size of destination string would be twice of input string.
-	For example if the src is "abcd", then dest would be "a1b1c1d1"
-	For other inputs, size would be less than twice. */
-	char* dest = (char*)malloc(sizeof(char) * (len * 2 + 1));
-
-	int i, j = 0, k;
-
-	/* traverse the input string one by one */
-	for (i = 0; i < len; i++) {
-
-		/* Copy the first occurrence of the new character */
-		dest[j++] = src[i];
-
-		/* Count the number of occurrences of the new character */
-		rLen = 1;
-		while (i + 1 < len && src[i] == src[i + 1]) {
-			rLen++;
-			i++;
-		}
-
-		/* Store rLen in a character array count[] */
-		sprintf(count, "%d", rLen);
-
-		/* Copy the count[] to destination */
-		for (k = 0; *(count + k); k++, j++) {
-			dest[j] = count[k];
-		}
-	}
-
-	/*terminate the destination string */
-	dest[j] = '\0';
-	return dest;
+    int original_len = *len;
+    rle_element* result = malloc(sizeof(rle_element) * (original_len*2 + 1));
+    
+    int i = 0; 
+    int result_i = 0;;
+    while(i<original_len)
+    {
+        rle_element current_element = image[i];
+        rle_element curr_count = 0;
+        
+        while(image[i] == current_element)
+        {
+            curr_count++;
+            i++;
+        }
+        
+        result[result_i] = curr_count;
+        result[result_i + 1] = current_element;
+        result_i += 2;
+    }
+    
+    *len = result_i;
+    
+    return result;
 }
 
-/*driver program to test above function */
-int main(int argc, char **argv)
+int main()
 {
-	// FILE *file;
-    // file = fopen(argv[1], "r'");
-    // char *content;
-    // long file_size;
-	
-    // // Move the file pointer to the end to get the file size
-    // fseek(file, 0, SEEK_END);
-    // file_size = ftell(file);
-    // rewind(file);
 
-    // // Allocate memory to hold the contents of the file
-    // content = (char *)malloc(file_size + 1); // +1 for null terminator
-
-    // // Read the file content into the string
-    // fread(content, 1, file_size, file);
-    // content[file_size] = '\0'; // Null-terminate the string
-
-    // // Print the file content
-    // printf("File contents:\n%s\n", content);
-
-    // char* res = encode(content);
-    // printf("Encoded %s",res);
-
-    // // Clean up
-    // free(content);
-    // fclose(file);
-    // free(res);
+    int len = ( sizeof(frame_0_delay_0_22s) / sizeof(rle_element) );
+    
+    rle_element* result = encode(frame_0_delay_0_22s, &len);
+    
+    
+    //temp printing output
+    for(int i = 0; i<len; i++)
+    {
+        printf("%x ",result[i]);
+    }
+    //do file output here
 
 	FILE *file;
-    file = fopen("Output.txt", "rw'");
-    char *content;
+    file = fopen("Output.txt", "wb");
+	//fwrite(result, sizeof(rle_element), len, file);
 
-	char* res = encode(Crasher_Wake);
+	char buf[50];
+	sprintf(buf,"Length is %d\n",len);
+	fwrite(buf, sizeof(char), strlen(buf), file);
 
-
-	free(res);
-
+	for(int i = 0; i<len; i++)
+    {
+		sprintf(buf,"0x%04x,",result[i]);
+        fwrite(buf, sizeof(char), strlen(buf), file);
+    }
+    
+	fclose(file);
+    free(result);
     return 0;
 }

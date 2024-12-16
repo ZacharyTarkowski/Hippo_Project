@@ -2,7 +2,7 @@
 #include "stm32f4xx_hal.h"
 #include "ili9341.h"
 
-static void ILI9341_Select() {
+void ILI9341_Select() {
     HAL_GPIO_WritePin(ILI9341_CS_GPIO_Port, ILI9341_CS_Pin, GPIO_PIN_RESET);
 }
 
@@ -306,3 +306,45 @@ void ILI9341_InvertColors(bool invert) {
     ILI9341_Unselect();
 }
 
+/****************************************** Modified by Zach Tarkowski ***************************************************/
+
+//RLE format is (num,data) 
+//only works for 240x320 images for now
+void ILI9341_Draw_Run_Length_Encoded_Image(const uint16_t* data, uint32_t len) {
+
+    ILI9341_Select();
+    ILI9341_SetAddressWindow(0, 0, 240-1, 320-1);
+
+    if(len>20000)
+    {
+        uart_println("Length will exceed buffer in run length encoded image decode");
+        //bail
+        while(1);
+    }
+
+    //shitty temp buffer that assumes the max run length is 4096
+    uint16_t temp[20000];
+
+    for(int i = 0; i<len; i+=2)
+    {
+        //shitty temp buffer method
+        // uint16_t data_len = data[i];
+        // uint16_t val = data[i+1];
+        // memset(temp,val,data_len*sizeof(uint16_t));
+        // ILI9341_WriteData((uint8_t*)temp, data[i]*sizeof(uint16_t));
+
+
+        for(int j = 0; j<data[i]; j++)
+        {
+            temp[j] = data[i+1];
+        }
+        ILI9341_WriteData((uint8_t*) temp, data[i]*sizeof(uint16_t));
+
+        // for(int j = 0; j<data[i]; j++)
+        // {
+        //     ILI9341_WriteData((uint8_t*) &data[i+1], sizeof(uint16_t));
+        // }
+    }
+    
+    ILI9341_Unselect();
+}

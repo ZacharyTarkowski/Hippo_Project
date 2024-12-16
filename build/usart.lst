@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 1
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 1
   28:Core/Src/usart.c **** 
   29:Core/Src/usart.c **** /* USART2 init function */
   30:Core/Src/usart.c **** 
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 2
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s 			page 2
 
 
   31:Core/Src/usart.c **** void MX_USART2_UART_Init(void)
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 1
   65              		.loc 1 48 28 is_stmt 0 view .LVU16
   66 001c C361     		str	r3, [r0, #28]
   49:Core/Src/usart.c ****   if (HAL_UART_Init(&huart2) != HAL_OK)
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 3
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s 			page 3
 
 
   67              		.loc 1 49 3 is_stmt 1 view .LVU17
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 1
  111              		.cfi_def_cfa_offset 40
   61:Core/Src/usart.c **** 
   62:Core/Src/usart.c ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 4
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s 			page 4
 
 
  112              		.loc 1 62 3 is_stmt 1 view .LVU25
@@ -194,7 +194,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 1
  121              		.loc 1 63 16 is_stmt 0 view .LVU28
  122 0010 0268     		ldr	r2, [r0]
  123              		.loc 1 63 5 view .LVU29
- 124 0012 144B     		ldr	r3, .L11
+ 124 0012 154B     		ldr	r3, .L11
  125 0014 9A42     		cmp	r2, r3
  126 0016 02D0     		beq	.L10
  127              	.LVL3:
@@ -211,10 +211,10 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 1
   73:Core/Src/usart.c ****     PA2     ------> USART2_TX
   74:Core/Src/usart.c ****     PA3     ------> USART2_RX
   75:Core/Src/usart.c ****     */
-  76:Core/Src/usart.c ****     GPIO_InitStruct.Pin = USART_TX_Pin|USART_RX_Pin;
+  76:Core/Src/usart.c ****     GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3;
   77:Core/Src/usart.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   78:Core/Src/usart.c ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
-  79:Core/Src/usart.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  79:Core/Src/usart.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   80:Core/Src/usart.c ****     GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
   81:Core/Src/usart.c ****     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
   82:Core/Src/usart.c **** 
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 1
  140              		.loc 1 69 5 is_stmt 1 view .LVU31
  141              	.LBB2:
   69:Core/Src/usart.c **** 
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 5
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s 			page 5
 
 
  142              		.loc 1 69 5 view .LVU32
@@ -295,73 +295,77 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 1
  179              		.loc 1 77 26 is_stmt 0 view .LVU46
  180 0050 0223     		movs	r3, #2
  181 0052 0493     		str	r3, [sp, #16]
-  78:Core/Src/usart.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  78:Core/Src/usart.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
  182              		.loc 1 78 5 is_stmt 1 view .LVU47
   79:Core/Src/usart.c ****     GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 6
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s 			page 6
 
 
  183              		.loc 1 79 5 view .LVU48
+  79:Core/Src/usart.c ****     GPIO_InitStruct.Alternate = GPIO_AF7_USART2;
+ 184              		.loc 1 79 27 is_stmt 0 view .LVU49
+ 185 0054 0323     		movs	r3, #3
+ 186 0056 0693     		str	r3, [sp, #24]
   80:Core/Src/usart.c ****     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
- 184              		.loc 1 80 5 view .LVU49
+ 187              		.loc 1 80 5 is_stmt 1 view .LVU50
   80:Core/Src/usart.c ****     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
- 185              		.loc 1 80 31 is_stmt 0 view .LVU50
- 186 0054 0723     		movs	r3, #7
- 187 0056 0793     		str	r3, [sp, #28]
+ 188              		.loc 1 80 31 is_stmt 0 view .LVU51
+ 189 0058 0723     		movs	r3, #7
+ 190 005a 0793     		str	r3, [sp, #28]
   81:Core/Src/usart.c **** 
- 188              		.loc 1 81 5 is_stmt 1 view .LVU51
- 189 0058 03A9     		add	r1, sp, #12
- 190 005a 0348     		ldr	r0, .L11+4
- 191              	.LVL5:
+ 191              		.loc 1 81 5 is_stmt 1 view .LVU52
+ 192 005c 03A9     		add	r1, sp, #12
+ 193 005e 0348     		ldr	r0, .L11+4
+ 194              	.LVL5:
   81:Core/Src/usart.c **** 
- 192              		.loc 1 81 5 is_stmt 0 view .LVU52
- 193 005c FFF7FEFF 		bl	HAL_GPIO_Init
- 194              	.LVL6:
- 195              		.loc 1 87 1 view .LVU53
- 196 0060 DAE7     		b	.L7
- 197              	.L12:
- 198 0062 00BF     		.align	2
- 199              	.L11:
- 200 0064 00440040 		.word	1073759232
- 201 0068 00000240 		.word	1073872896
- 202              		.cfi_endproc
- 203              	.LFE135:
- 205              		.section	.text.HAL_UART_MspDeInit,"ax",%progbits
- 206              		.align	1
- 207              		.global	HAL_UART_MspDeInit
- 208              		.syntax unified
- 209              		.thumb
- 210              		.thumb_func
- 212              	HAL_UART_MspDeInit:
- 213              	.LVL7:
- 214              	.LFB136:
+ 195              		.loc 1 81 5 is_stmt 0 view .LVU53
+ 196 0060 FFF7FEFF 		bl	HAL_GPIO_Init
+ 197              	.LVL6:
+ 198              		.loc 1 87 1 view .LVU54
+ 199 0064 D8E7     		b	.L7
+ 200              	.L12:
+ 201 0066 00BF     		.align	2
+ 202              	.L11:
+ 203 0068 00440040 		.word	1073759232
+ 204 006c 00000240 		.word	1073872896
+ 205              		.cfi_endproc
+ 206              	.LFE135:
+ 208              		.section	.text.HAL_UART_MspDeInit,"ax",%progbits
+ 209              		.align	1
+ 210              		.global	HAL_UART_MspDeInit
+ 211              		.syntax unified
+ 212              		.thumb
+ 213              		.thumb_func
+ 215              	HAL_UART_MspDeInit:
+ 216              	.LVL7:
+ 217              	.LFB136:
   88:Core/Src/usart.c **** 
   89:Core/Src/usart.c **** void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
   90:Core/Src/usart.c **** {
- 215              		.loc 1 90 1 is_stmt 1 view -0
- 216              		.cfi_startproc
- 217              		@ args = 0, pretend = 0, frame = 0
- 218              		@ frame_needed = 0, uses_anonymous_args = 0
- 219              		.loc 1 90 1 is_stmt 0 view .LVU55
- 220 0000 08B5     		push	{r3, lr}
- 221              	.LCFI5:
- 222              		.cfi_def_cfa_offset 8
- 223              		.cfi_offset 3, -8
- 224              		.cfi_offset 14, -4
+ 218              		.loc 1 90 1 is_stmt 1 view -0
+ 219              		.cfi_startproc
+ 220              		@ args = 0, pretend = 0, frame = 0
+ 221              		@ frame_needed = 0, uses_anonymous_args = 0
+ 222              		.loc 1 90 1 is_stmt 0 view .LVU56
+ 223 0000 08B5     		push	{r3, lr}
+ 224              	.LCFI5:
+ 225              		.cfi_def_cfa_offset 8
+ 226              		.cfi_offset 3, -8
+ 227              		.cfi_offset 14, -4
   91:Core/Src/usart.c **** 
   92:Core/Src/usart.c ****   if(uartHandle->Instance==USART2)
- 225              		.loc 1 92 3 is_stmt 1 view .LVU56
- 226              		.loc 1 92 16 is_stmt 0 view .LVU57
- 227 0002 0268     		ldr	r2, [r0]
- 228              		.loc 1 92 5 view .LVU58
- 229 0004 064B     		ldr	r3, .L17
- 230 0006 9A42     		cmp	r2, r3
- 231 0008 00D0     		beq	.L16
- 232              	.LVL8:
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 7
+ 228              		.loc 1 92 3 is_stmt 1 view .LVU57
+ 229              		.loc 1 92 16 is_stmt 0 view .LVU58
+ 230 0002 0268     		ldr	r2, [r0]
+ 231              		.loc 1 92 5 view .LVU59
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s 			page 7
 
 
- 233              	.L13:
+ 232 0004 064B     		ldr	r3, .L17
+ 233 0006 9A42     		cmp	r2, r3
+ 234 0008 00D0     		beq	.L16
+ 235              	.LVL8:
+ 236              	.L13:
   93:Core/Src/usart.c ****   {
   94:Core/Src/usart.c ****   /* USER CODE BEGIN USART2_MspDeInit 0 */
   95:Core/Src/usart.c **** 
@@ -373,82 +377,82 @@ ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 1
  101:Core/Src/usart.c ****     PA2     ------> USART2_TX
  102:Core/Src/usart.c ****     PA3     ------> USART2_RX
  103:Core/Src/usart.c ****     */
- 104:Core/Src/usart.c ****     HAL_GPIO_DeInit(GPIOA, USART_TX_Pin|USART_RX_Pin);
+ 104:Core/Src/usart.c ****     HAL_GPIO_DeInit(GPIOA, GPIO_PIN_2|GPIO_PIN_3);
  105:Core/Src/usart.c **** 
  106:Core/Src/usart.c ****   /* USER CODE BEGIN USART2_MspDeInit 1 */
  107:Core/Src/usart.c **** 
  108:Core/Src/usart.c ****   /* USER CODE END USART2_MspDeInit 1 */
  109:Core/Src/usart.c ****   }
  110:Core/Src/usart.c **** }
- 234              		.loc 1 110 1 view .LVU59
- 235 000a 08BD     		pop	{r3, pc}
- 236              	.LVL9:
- 237              	.L16:
+ 237              		.loc 1 110 1 view .LVU60
+ 238 000a 08BD     		pop	{r3, pc}
+ 239              	.LVL9:
+ 240              	.L16:
   98:Core/Src/usart.c **** 
- 238              		.loc 1 98 5 is_stmt 1 view .LVU60
- 239 000c 054A     		ldr	r2, .L17+4
- 240 000e 136C     		ldr	r3, [r2, #64]
- 241 0010 23F40033 		bic	r3, r3, #131072
- 242 0014 1364     		str	r3, [r2, #64]
+ 241              		.loc 1 98 5 is_stmt 1 view .LVU61
+ 242 000c 054A     		ldr	r2, .L17+4
+ 243 000e 136C     		ldr	r3, [r2, #64]
+ 244 0010 23F40033 		bic	r3, r3, #131072
+ 245 0014 1364     		str	r3, [r2, #64]
  104:Core/Src/usart.c **** 
- 243              		.loc 1 104 5 view .LVU61
- 244 0016 0C21     		movs	r1, #12
- 245 0018 0348     		ldr	r0, .L17+8
- 246              	.LVL10:
+ 246              		.loc 1 104 5 view .LVU62
+ 247 0016 0C21     		movs	r1, #12
+ 248 0018 0348     		ldr	r0, .L17+8
+ 249              	.LVL10:
  104:Core/Src/usart.c **** 
- 247              		.loc 1 104 5 is_stmt 0 view .LVU62
- 248 001a FFF7FEFF 		bl	HAL_GPIO_DeInit
- 249              	.LVL11:
- 250              		.loc 1 110 1 view .LVU63
- 251 001e F4E7     		b	.L13
- 252              	.L18:
- 253              		.align	2
- 254              	.L17:
- 255 0020 00440040 		.word	1073759232
- 256 0024 00380240 		.word	1073887232
- 257 0028 00000240 		.word	1073872896
- 258              		.cfi_endproc
- 259              	.LFE136:
- 261              		.global	huart2
- 262              		.section	.bss.huart2,"aw",%nobits
- 263              		.align	2
- 264              		.set	.LANCHOR0,. + 0
- 267              	huart2:
- 268 0000 00000000 		.space	72
- 268      00000000 
- 268      00000000 
- 268      00000000 
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 8
+ 250              		.loc 1 104 5 is_stmt 0 view .LVU63
+ 251 001a FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 252              	.LVL11:
+ 253              		.loc 1 110 1 view .LVU64
+ 254 001e F4E7     		b	.L13
+ 255              	.L18:
+ 256              		.align	2
+ 257              	.L17:
+ 258 0020 00440040 		.word	1073759232
+ 259 0024 00380240 		.word	1073887232
+ 260 0028 00000240 		.word	1073872896
+ 261              		.cfi_endproc
+ 262              	.LFE136:
+ 264              		.global	huart2
+ 265              		.section	.bss.huart2,"aw",%nobits
+ 266              		.align	2
+ 267              		.set	.LANCHOR0,. + 0
+ 270              	huart2:
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s 			page 8
 
 
- 268      00000000 
- 269              		.text
- 270              	.Letext0:
- 271              		.file 2 "c:\\users\\zacht\\documents\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\\arm-n
- 272              		.file 3 "c:\\users\\zacht\\documents\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\\arm-n
- 273              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xe.h"
- 274              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
- 275              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
- 276              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
- 277              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
- 278              		.file 9 "Core/Inc/main.h"
- 279              		.file 10 "Core/Inc/usart.h"
-ARM GAS  C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s 			page 9
+ 271 0000 00000000 		.space	72
+ 271      00000000 
+ 271      00000000 
+ 271      00000000 
+ 271      00000000 
+ 272              		.text
+ 273              	.Letext0:
+ 274              		.file 2 "c:\\users\\zacht\\desktop\\files\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\\
+ 275              		.file 3 "c:\\users\\zacht\\desktop\\files\\projects\\stm32_tools\\gcc-arm-none-eabi-10.3-2021.10\\
+ 276              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f401xc.h"
+ 277              		.file 5 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h"
+ 278              		.file 6 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_gpio.h"
+ 279              		.file 7 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_dma.h"
+ 280              		.file 8 "Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h"
+ 281              		.file 9 "Core/Inc/main.h"
+ 282              		.file 10 "Core/Inc/usart.h"
+ARM GAS  C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 usart.c
-C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:20     .text.MX_USART2_UART_Init:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:26     .text.MX_USART2_UART_Init:00000000 MX_USART2_UART_Init
-C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:85     .text.MX_USART2_UART_Init:0000002c $d
-C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:91     .text.HAL_UART_MspInit:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:97     .text.HAL_UART_MspInit:00000000 HAL_UART_MspInit
-C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:200    .text.HAL_UART_MspInit:00000064 $d
-C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:206    .text.HAL_UART_MspDeInit:00000000 $t
-C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:212    .text.HAL_UART_MspDeInit:00000000 HAL_UART_MspDeInit
-C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:255    .text.HAL_UART_MspDeInit:00000020 $d
-C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:267    .bss.huart2:00000000 huart2
-C:\Users\zacht\AppData\Local\Temp\ccHF6qDW.s:263    .bss.huart2:00000000 $d
+C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s:20     .text.MX_USART2_UART_Init:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s:26     .text.MX_USART2_UART_Init:00000000 MX_USART2_UART_Init
+C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s:85     .text.MX_USART2_UART_Init:0000002c $d
+C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s:91     .text.HAL_UART_MspInit:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s:97     .text.HAL_UART_MspInit:00000000 HAL_UART_MspInit
+C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s:203    .text.HAL_UART_MspInit:00000068 $d
+C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s:209    .text.HAL_UART_MspDeInit:00000000 $t
+C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s:215    .text.HAL_UART_MspDeInit:00000000 HAL_UART_MspDeInit
+C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s:258    .text.HAL_UART_MspDeInit:00000020 $d
+C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s:270    .bss.huart2:00000000 huart2
+C:\Users\zacht\AppData\Local\Temp\cc0q3s92.s:266    .bss.huart2:00000000 $d
 
 UNDEFINED SYMBOLS
 HAL_UART_Init
