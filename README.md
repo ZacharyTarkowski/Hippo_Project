@@ -1,14 +1,15 @@
 # Hippo_Project
 
+Project for my Mother, who is a teacher with a hippo themed classroom. The animation I will use is a hippo waving when the IR sensor is triggered, and sleeping when not triggered. Until I get the art for that, the placeholder is Crasher Wake from Pokemon.
+
 Plays an idle animation until an IR sensor is triggered, then plays the active animation on a TFT screen.
 
 Will be a cartoon hippo for my moms classroom.
 
 "Animation" is a strong word, it rotates between a series of pictures.
 
-Lazy hack to not use the SD card is to run-length encode the images.
+Lazy hack to not use the SD card is to run-length encode the images. Encoder is included, it should spit out a C array to pop into Hippo_Images.h
 
 Credit to :
-Placeholder for TFT lib (draw_image doesnt work for me btw)
-Placeholder for TFT lib 2 (draw image works but screen clear is significantly slower than TFT lib 1's)
-Placeholder for geeksforgeeks runlength encoder
+https://github.com/afiskon/stm32-ili9341 (draw_image doesnt work for me btw)
+https://github.com/martnak/STM32-ILI9341 (draw image works but screen clear is significantly slower than TFT lib 1's)
