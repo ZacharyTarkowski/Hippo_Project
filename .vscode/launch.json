@@ -3,8 +3,8 @@
     "configurations": [
         {
             "name": "STM32 Debug",
-            //"cwd": "C:/Users/zacht/Desktop/Files/Projects/STM32_tools/gcc-arm-none-eabi-10.3-2021.10/bin",
-            "cwd": "${workspaceRoot}",
+            "cwd": "C:/Users/zacht/Desktop/Files/Projects/STM32_tools/gcc-arm-none-eabi-10.3-2021.10/bin",
+            //"cwd": "${workspaceRoot}",
             "executable": "${workspaceRoot}/build/Hippo_Project_bp.elf",
             "request": "launch",
             "type": "cortex-debug",

@@ -307,7 +307,7 @@ void ILI9341_InvertColors(bool invert) {
 }
 
 /****************************************** Modified by Zach Tarkowski ***************************************************/
-
+#define MAX_IMAGE_LEN 30000
 //RLE format is (num,data) 
 //only works for 240x320 images for now
 void ILI9341_Draw_Run_Length_Encoded_Image(const uint16_t* data, uint32_t len) {
@@ -315,7 +315,7 @@ void ILI9341_Draw_Run_Length_Encoded_Image(const uint16_t* data, uint32_t len) {
     ILI9341_Select();
     ILI9341_SetAddressWindow(0, 0, 240-1, 320-1);
 
-    if(len>20000)
+    if(len>MAX_IMAGE_LEN)
     {
         uart_println("Length will exceed buffer in run length encoded image decode");
         //bail
@@ -323,7 +323,7 @@ void ILI9341_Draw_Run_Length_Encoded_Image(const uint16_t* data, uint32_t len) {
     }
 
     //shitty temp buffer that assumes the max run length is 4096
-    uint16_t temp[20000];
+    uint16_t temp[MAX_IMAGE_LEN];
 
     for(int i = 0; i<len; i+=2)
     {

@@ -28,5 +28,6 @@
         "type_traits": "c"
     },
     "cortex-debug.variableUseNaturalFormat": false,
-    "cmake.sourceDirectory": "C:/Users/zacht/Documents/Projects/Hippo_STM/Hippo_Project/Drivers/CMSIS/DSP/Source"
+    "cmake.sourceDirectory": "C:/Users/zacht/Documents/Projects/Hippo_STM/Hippo_Project/Drivers/CMSIS/DSP/Source",
+    "idf.pythonInstallPath": "C:\\Espressif\\tools\\idf-python\\3.11.2\\python.exe"
 }
