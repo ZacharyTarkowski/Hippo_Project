@@ -4,8 +4,11 @@
 #include <string.h>
 //#include "Raw_Images.h"
 
-#include "hippo_asleep_unfinished.h"
-#include "hippo_awake_unfinished.h"
+#include "Hippo_Awake_1.h"
+#include "Hippo_Awake_2.h"
+#include "Hippo_Asleep_1.h"
+#include "Hippo_Asleep_2.h"
+
 
 #define rle_element uint16_t
 #define image_name Untitled_Artwork
@@ -78,8 +81,10 @@ int main()
 	sprintf(buf,"#ifndef %s \n#define %s \n#include <stdint.h>\n", OUTPUT_HEADER , OUTPUT_HEADER);
 	fwrite(buf, sizeof(char), strlen(buf), file);
 
-	write_and_encode(file, hippo_awake_unfinished, "hippo_awake_unfinished", sizeof(hippo_awake_unfinished));
-	write_and_encode(file, hippo_asleep_unfinished, "hippo_asleep_unfinished", sizeof(hippo_asleep_unfinished));	
+	write_and_encode(file, Hippo_Awake_1, "Hippo_Awake_1", sizeof(Hippo_Awake_1));
+	write_and_encode(file, Hippo_Awake_2, "Hippo_Awake_2", sizeof(Hippo_Awake_2));
+	write_and_encode(file, Hippo_Asleep_1, "Hippo_Asleep_1", sizeof(Hippo_Asleep_1));
+	write_and_encode(file, Hippo_Asleep_2, "Hippo_Asleep_2", sizeof(Hippo_Asleep_2));	
 
 	sprintf(buf,"#endif \n");
 	fwrite(buf, sizeof(char), strlen(buf), file);

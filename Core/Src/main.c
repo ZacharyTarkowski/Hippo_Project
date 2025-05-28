@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "spi.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -26,7 +27,7 @@
 /* USER CODE BEGIN Includes */
 
 #include "Hippo_Logic.h"
-#include "General_Utils.h"
+
 
 /* USER CODE END Includes */
 
@@ -51,25 +52,38 @@
 
 
 volatile u32 ir_sensor_flag_valid_time;
-volatile u8 ir_sensor_flag;
+volatile extern u8 ir_sensor_flag;
 //should make a interruptutils
 
-// void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-// {
-// 	u32 ir_sensor_flag_current_time;
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	switch(GPIO_Pin)
+	{
+    case GPIO_PIN_10:
+    if(GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_10))
+      {
+        ir_sensor_flag = 1;
+        uart_println("Interrupt triggered %d",GPIO_Pin);
+      }
+      break;
 
-// 	switch(GPIO_Pin)
-// 	{
-//     case GPIO_PIN_10:
-//       ir_sensor_flag = !ir_sensor_flag;
-//       uart_println("Unhandled interrupt triggered %d",GPIO_Pin);
-//       break;
+    default:
+      uart_println("Unhandled interrupt triggered %d",GPIO_Pin);
+		break;
+	}
+}
 
-//     default:
-      
-// 		break;
-// 	}
-// }
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim)
+{
+	if(htim->Instance == htim3.Instance)
+	{
+		if(GPIO_PIN_SET == HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_10))
+      {
+        ir_sensor_flag = 1;
+        uart_println("Interrupt triggered %d",GPIO_PIN_10);
+      }
+	}
+}
 
 
 /* USER CODE END PV */
@@ -116,12 +130,16 @@ int main(void)
   MX_GPIO_Init();
   MX_SPI1_Init();
   MX_USART2_UART_Init();
+  MX_TIM3_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
   ILI9341_Unselect();
   ILI9341_Init();
   ILI9341_FillScreen(ILI9341_BLACK);
 
   STATE_E state = STATE_IDLE;
+
+
 
   /* USER CODE END 2 */
 
@@ -132,25 +150,40 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    ir_sensor_flag = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_10);
+    //ir_sensor_flag = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_10);
+    //uart_println("Pin is %d",ir_sensor_flag);
+
+    //PIR sensor needs to calibrate
+    
+    volatile u8 read = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_10);
 
     switch(state)
     {
       case STATE_IDLE:
 
         run_idle_state();
-        if(ir_sensor_flag == GPIO_PIN_RESET)
+        if(ir_sensor_flag == 1)
         {
           state = STATE_ACTIVE;
+          ir_sensor_flag = 0;
         }
       break;
 
       case STATE_ACTIVE:
+        
         run_active_state();
-        if(ir_sensor_flag == GPIO_PIN_SET)
+
+        read == HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_10);
+        if(read == GPIO_PIN_SET)
+        {
+
+        }
+        else
         {
           state = STATE_IDLE;
+          ir_sensor_flag = 0;
         }
+
       break;
 
       default:
